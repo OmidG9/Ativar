@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-bg: #ffffff;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f5fafc;
+  --color-primary: #176b9b;
+  --color-accent: #12afc1;
+  --color-text-primary: #243746;
+  --color-text-secondary: #607482;
+  --color-border: #e1eaf0;
+}
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text-primary);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: rgba(18, 175, 193, 0.18);
+}
+
+.container-custom {
+  @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+}
+
+.section-padding {
+  @apply py-12 sm:py-16 lg:py-20;
+}
+
+.section-title {
+  @apply text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight text-text-primary;
+}
+
+.section-subtitle {
+  @apply mt-4 text-base sm:text-lg leading-relaxed text-text-secondary max-w-3xl;
+}
+
+.card {
+  @apply rounded-2xl border border-border bg-surface shadow-subtle transition-shadow hover:shadow-card;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40;
+}
+
+.btn-primary {
+  @apply bg-brand-primary text-white hover:bg-[#145c87];
+}
+
+.btn-outline {
+  @apply border border-brand-primary/20 text-brand-primary hover:bg-brand-blueLight;
+}
+
+.btn-ghost {
+  @apply text-text-primary hover:bg-brand-light;
+}
