@@ -184,20 +184,15 @@ export default function HomePage() {
           </div>
         </div>
 
-        <div className="border-t border-border/80 bg-white/80 backdrop-blur">
-          <div className="container-custom flex flex-wrap items-center justify-center py-3 text-center text-xs text-text-secondary">
-            <p>تمرکز بر سازمان‌های فنی، مالی و مدیریتی</p>
-          </div>
-        </div>
       </section>
 
       {/* Trust Bar */}
       <section className="relative overflow-hidden border-b border-border bg-white py-5">
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
-        <div className="group flex w-full items-center overflow-hidden">
-          <div className="animate-marquee flex shrink-0 items-center gap-10 whitespace-nowrap px-6 will-change-transform">
-            <div className="flex items-center gap-10">
+        <div className="group w-full overflow-hidden" dir="ltr">
+          <div className="animate-marquee flex w-max items-center">
+            <div className="flex items-center gap-12 whitespace-nowrap">
               <span className="text-sm text-text-primary">مشاوره فین‌تک</span>
               <span className="h-1 w-1 rounded-full bg-brand-accent" />
               <span className="text-sm text-text-primary">معماری مالی دیجیتال</span>
@@ -207,8 +202,24 @@ export default function HomePage() {
               <span className="text-sm text-text-primary">راهکارهای پروژه‌محور</span>
               <span className="h-1 w-1 rounded-full bg-brand-accent" />
               <span className="text-sm text-text-secondary">تمرکز بر سازمان‌های فنی، مالی و مدیریتی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm font-semibold text-text-primary">+۲۵</span>
+              <span className="text-sm text-text-secondary">پروژه موفق در حوزه فین‌تک و هوش مصنوعی سازمانی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">محیط هوش مصنوعی اختصاصی و کنترل‌شده</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">نظارت انسانی، محرمانگی و حریم داده</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">قابل استقرار در زیرساخت سازمان (On-Premise)</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">طراحی معماری، یکپارچه‌سازی و انتقال دانش</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">رویکرد مسئله‌محور و نتیجه‌گرا</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">شناسایی، ارزیابی و اجرای راهکارهای کاربردی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
             </div>
-            <div className="flex items-center gap-10" aria-hidden="true">
+            <div className="flex items-center gap-12 whitespace-nowrap" aria-hidden="true">
               <span className="text-sm text-text-primary">مشاوره فین‌تک</span>
               <span className="h-1 w-1 rounded-full bg-brand-accent" />
               <span className="text-sm text-text-primary">معماری مالی دیجیتال</span>
@@ -218,6 +229,22 @@ export default function HomePage() {
               <span className="text-sm text-text-primary">راهکارهای پروژه‌محور</span>
               <span className="h-1 w-1 rounded-full bg-brand-accent" />
               <span className="text-sm text-text-secondary">تمرکز بر سازمان‌های فنی، مالی و مدیریتی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm font-semibold text-text-primary">+۲۵</span>
+              <span className="text-sm text-text-secondary">پروژه موفق در حوزه فین‌تک و هوش مصنوعی سازمانی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">محیط هوش مصنوعی اختصاصی و کنترل‌شده</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">نظارت انسانی، محرمانگی و حریم داده</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">قابل استقرار در زیرساخت سازمان (On-Premise)</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">طراحی معماری، یکپارچه‌سازی و انتقال دانش</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">رویکرد مسئله‌محور و نتیجه‌گرا</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
+              <span className="text-sm text-text-primary">شناسایی، ارزیابی و اجرای راهکارهای کاربردی</span>
+              <span className="h-1 w-1 rounded-full bg-brand-accent" />
             </div>
           </div>
         </div>
