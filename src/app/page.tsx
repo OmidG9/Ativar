@@ -111,7 +111,7 @@ export default function HomePage() {
       <section className="relative overflow-hidden border-b border-border pt-8 pb-8">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(18,175,193,0.08),transparent)]" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_10%_-20%,rgba(23,107,155,0.07),transparent)]" />
-        <div className="container-custom grid items-center gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
+        <div className="container-custom grid items-center gap-12 pt-[calc(4rem+20px)] pb-[calc(4rem+20px)] lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pt-[calc(6rem+20px)] lg:pb-[calc(6rem+20px)]">
           <div>
             <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/80 px-4 py-1.5 text-xs text-text-secondary shadow-subtle backdrop-blur">
               <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" aria-hidden="true" />
