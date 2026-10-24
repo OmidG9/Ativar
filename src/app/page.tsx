@@ -108,7 +108,7 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border">
+      <section className="relative overflow-hidden border-b border-border pt-8 pb-8">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(18,175,193,0.08),transparent)]" />
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_10%_-20%,rgba(23,107,155,0.07),transparent)]" />
         <div className="container-custom grid items-center gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:py-24">
@@ -251,7 +251,7 @@ export default function HomePage() {
       </section>
 
       {/* Problems */}
-      <section className="section-padding">
+      <section className="py-16 sm:py-24 lg:py-28">
         <div className="container-custom">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
             <div>
@@ -280,7 +280,7 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section className="section-padding border-y border-border bg-[#FAFCFD]">
+      <section className="py-16 sm:py-24 lg:py-28 border-y border-border bg-[#FAFCFD]">
         <div className="container-custom">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
@@ -331,7 +331,7 @@ export default function HomePage() {
       </section>
 
       {/* Intelligence levels */}
-      <section className="section-padding">
+      <section className="py-16 sm:py-24 lg:py-28">
         <div className="container-custom">
           <p className="text-xs font-medium text-text-secondary">۰۳ / هوش مصنوعی سازمانی آتیوار</p>
           <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -371,7 +371,7 @@ export default function HomePage() {
       </section>
 
       {/* AI Workspace */}
-      <section className="section-padding">
+      <section className="py-16 sm:py-24 lg:py-28">
         <div className="container-custom grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
             <p className="text-xs font-medium text-text-secondary">۰۴ / محصول</p>
@@ -409,7 +409,7 @@ export default function HomePage() {
       </section>
 
       {/* Process */}
-      <section className="section-padding border-y border-border bg-[#FAFCFD]">
+      <section className="py-16 sm:py-24 lg:py-28 border-y border-border bg-[#FAFCFD]">
         <div className="container-custom">
           <p className="text-xs font-medium text-text-secondary">۰۵ / روش همکاری</p>
           <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
@@ -432,7 +432,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA */}
-      <section className="section-padding">
+      <section className="py-16 sm:py-24 lg:py-28">
         <div className="container-custom max-w-4xl text-center">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-white px-6 py-12 sm:px-10 sm:py-14">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(700px_300px_at_50%_-20%,rgba(18,175,193,0.09),transparent)]" />
