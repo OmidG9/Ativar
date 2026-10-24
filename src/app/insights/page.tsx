@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { articles } from "@/content/articles";
+import { formatPersianDate } from "@/lib/date";
 import { createMetadata } from "@/lib/metadata";
 
 export const metadata = createMetadata({
@@ -6,15 +8,6 @@ export const metadata = createMetadata({
   description: "مقالات تخصصی و کاربردی آتیوار برای مدیران در حوزه فین‌تک، هوش مصنوعی سازمانی و تحول دیجیتال.",
   path: "/insights",
 });
-
-const articles = [
-  { title: "چگونه قبل از سرمایه‌گذاری در AI، توجیه اقتصادی آن را بسنجیم؟", cat: "هوش مصنوعی سازمانی" },
-  { title: "هوش مصنوعی چگونه هزینه‌های سازمان را کاهش می‌دهد؟", cat: "هوش مصنوعی سازمانی" },
-  { title: "چگونه از اطلاعات داخلی سازمان برای پاسخ‌گویی هوشمند استفاده کنیم؟", cat: "مدیریت دانش" },
-  { title: "چه خطراتی در استفاده سازمانی از هوش مصنوعی وجود دارد؟", cat: "امنیت و حاکمیت داده" },
-  { title: "چگونه یک پروژه فناوری را مرحله‌ای و قابل کنترل اجرا کنیم؟", cat: "مدیریت پروژه فناوری" },
-  { title: "ماشین مجازی هوش مصنوعی چه تفاوتی با پلتفرم AI سازمانی دارد؟", cat: "معماری راهکار" },
-];
 
 export default function InsightsPage() {
   return (
@@ -30,20 +23,32 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light/60">
+      <section className="pb-16 sm:pb-24">
         <div className="container-custom">
-          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <div className="border-t border-border">
             {articles.map((article) => (
-              <article key={article.title} className="card flex h-full flex-col p-6">
-                <span className="inline-flex w-fit rounded-full border border-border px-3 py-1 text-xs text-text-secondary">
-                  {article.cat}
-                </span>
-                <h2 className="mt-4 text-lg font-semibold leading-relaxed text-text-primary">{article.title}</h2>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">
-                  این مقاله در حال آماده‌سازی است و به‌زودی منتشر خواهد شد.
-                </p>
-                <div className="mt-6">
-                  <span className="text-sm text-text-secondary">به‌زودی</span>
+              <article key={article.slug} className="border-b border-border py-8">
+                <div className="grid gap-4 md:grid-cols-[10rem_minmax(0,1fr)] md:gap-8">
+                  <div className="text-xs leading-6 text-text-secondary">
+                    <p>{formatPersianDate(article.publishedAt)}</p>
+                    <p>{article.readingMinutes} دقیقه مطالعه</p>
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold tracking-wide text-brand-accent">
+                      {article.category}
+                    </p>
+                    <h2 className="mt-2 text-lg font-semibold leading-8 text-text-primary sm:text-xl">
+                      <Link
+                        href={`/insights/${article.slug}`}
+                        className="hover:text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/40"
+                      >
+                        {article.title}
+                      </Link>
+                    </h2>
+                    <p className="mt-2 max-w-2xl text-sm leading-7 text-text-secondary">
+                      {article.description}
+                    </p>
+                  </div>
                 </div>
               </article>
             ))}
@@ -51,22 +56,18 @@ export default function InsightsPage() {
         </div>
       </section>
 
-      <section className="section-padding">
+      <section className="section-padding bg-brand-light/60">
         <div className="container-custom">
-          <div className="card p-8 lg:p-10">
-            <div className="grid gap-6 lg:grid-cols-2 lg:items-center">
-              <div>
-                <h2 className="text-2xl font-bold text-text-primary">آیا موضوع خاصی مدنظرتان است؟</h2>
-                <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-                  اگر به موضوع خاصی در حوزه فین‌تک یا هوش مصنوعی سازمانی نیاز دارید، می‌توانید آن را در جلسه مشاوره مطرح کنید.
-                </p>
-              </div>
-              <div className="flex flex-col items-start gap-3 lg:items-end">
-                <Link href="/contact" className="btn btn-primary">
-                  درخواست جلسه مشاوره
-                </Link>
-              </div>
+          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+            <div>
+              <h2 className="text-2xl font-bold text-text-primary">آیا موضوع خاصی مدنظرتان است؟</h2>
+              <p className="mt-2 max-w-xl text-sm leading-7 text-text-secondary">
+                اگر به موضوع خاصی در حوزه فین‌تک یا هوش مصنوعی سازمانی نیاز دارید، می‌توانید آن را در جلسه مشاوره مطرح کنید.
+              </p>
             </div>
+            <Link href="/contact" className="btn btn-primary shrink-0">
+              درخواست جلسه مشاوره
+            </Link>
           </div>
         </div>
       </section>

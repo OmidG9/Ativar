@@ -18,7 +18,7 @@ export default function AIWorkspacePage() {
               ATIVAR AI Workspace محیطی است برای استقرار و استفاده سازمانی از قابلیت‌های هوش مصنوعی که متناسب با نیاز، زیرساخت، سیاست‌های امنیتی و دانش اختصاصی هر سازمان پیکربندی می‌شود.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/contact" className="btn btn-primary">
+              <Link href="/contact?type=ai-workspace" className="btn btn-primary">
                 درخواست ارزیابی و طراحی محیط اختصاصی
               </Link>
               <Link href="/solutions/enterprise-ai" className="btn btn-outline">

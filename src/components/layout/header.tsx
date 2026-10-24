@@ -6,12 +6,19 @@ import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
 
-const navItems = [
+type NavItem = {
+  href: string;
+  label: string;
+  external?: boolean;
+};
+
+const navItems: NavItem[] = [
   { href: "/services/consulting", label: "مشاوره" },
   { href: "/solutions/enterprise-ai", label: "هوش مصنوعی سازمانی" },
   { href: "/products/ai-workspace", label: "AI Workspace" },
   { href: "/solutions/fintech", label: "فین‌تک" },
   { href: "/projects", label: "پروژه‌ها" },
+  { href: "https://hub.ativar.ir", label: "هاب فلزات گران‌بها", external: true },
   { href: "/about/team", label: "درباره آتیوار" },
 ];
 
@@ -47,7 +54,21 @@ export function Header() {
 
         <nav aria-label="ناوبری اصلی" className="hidden items-center gap-6 lg:flex">
           {navItems.map((item) => {
-            const active = pathname === item.href;
+            const isExternal = item.external;
+            const active = !isExternal && pathname === item.href;
+            if (isExternal) {
+              return (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="rounded-md py-2 text-[13px] font-medium text-text-secondary transition-colors hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+                >
+                  {item.label}
+                </a>
+              );
+            }
             return (
               <Link
                 key={item.href}
@@ -91,16 +112,32 @@ export function Header() {
       {open && (
         <div id="mobile-menu" className="border-t border-border bg-white lg:hidden">
           <nav aria-label="ناوبری موبایل" className="container-custom flex flex-col py-3">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                aria-current={pathname === item.href ? "page" : undefined}
-                className="rounded-lg px-2 py-2.5 text-sm text-text-primary hover:bg-brand-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const isExternal = item.external;
+              if (isExternal) {
+                return (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="rounded-lg px-2 py-2.5 text-sm text-text-primary hover:bg-brand-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+                  >
+                    {item.label}
+                  </a>
+                );
+              }
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={pathname === item.href ? "page" : undefined}
+                  className="rounded-lg px-2 py-2.5 text-sm text-text-primary hover:bg-brand-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link href="/contact" className="btn btn-primary mt-3 w-full">
               درخواست جلسه مشاوره
             </Link>

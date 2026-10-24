@@ -37,6 +37,12 @@ export default function ProjectsPage() {
                 <p>• رویکرد: طراحی سامانه تخصصی و بهبود جریان‌های عملیاتی</p>
                 <p>• مسیر توسعه: افزودن قابلیت‌های هوشمند و گسترش به راهکارهای سازمانی</p>
               </div>
+              <Link
+                href="/projects/precious-metals-platform"
+                className="mt-6 inline-flex text-sm font-semibold text-brand-primary"
+              >
+                مشاهده مطالعه موردی
+              </Link>
             </div>
             <div className="card p-8">
               <h2 className="text-xl font-semibold text-text-primary">رویکرد مطالعه موردی در آتیوار</h2>

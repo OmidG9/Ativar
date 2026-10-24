@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 type FormState = {
   fullName: string;
@@ -55,6 +55,14 @@ export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
+
+  // Deep links from product pages can preselect the relevant request type.
+  useEffect(() => {
+    const requestedType = new URLSearchParams(window.location.search).get("type");
+    if (requestedType === "ai-workspace") {
+      setForm((previous) => ({ ...previous, requestType: "درخواست ارزیابی هوش مصنوعی" }));
+    }
+  }, []);
 
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
