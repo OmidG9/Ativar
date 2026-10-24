@@ -64,19 +64,27 @@ const values = [
 export default function HomePage() {
   return (
     <>
-      <section className="section-padding">
-        <div className="container-custom grid items-center gap-10 lg:grid-cols-2">
-          <div>
-            <div className="inline-flex items-center rounded-full border border-border px-3 py-1 text-sm text-text-secondary">
+      <section className="relative overflow-hidden section-padding">
+        <div className="absolute inset-0 -z-10">
+          <div className="absolute -top-40 right-[-10%] h-[420px] w-[420px] rounded-full bg-brand-accent/10 blur-3xl" />
+          <div className="absolute top-20 left-[-15%] h-[360px] w-[360px] rounded-full bg-brand-primary/8 blur-3xl" />
+          <div className="grid-glow absolute inset-0 opacity-60" />
+        </div>
+        <div className="container-custom grid items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="stagger">
+            <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/80 px-4 py-1 text-sm text-text-secondary shadow-subtle backdrop-blur">
+              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" />
               هوش مصنوعی، در خدمت تصمیم بهتر و عملکرد برتر سازمان شما
             </div>
-            <h1 className="mt-6 text-3xl font-bold leading-tight text-text-primary sm:text-4xl lg:text-5xl">
-              هوش مصنوعی را به یک مزیت واقعی برای کسب‌وکار خود تبدیل کنید
+            <h1 className="mt-6 text-3xl font-bold leading-tight tracking-tight text-text-primary sm:text-4xl lg:text-5xl xl:text-6xl">
+              زیرساخت هوش مصنوعی برای
+              <span className="bg-gradient-to-l from-brand-primary via-brand-accent to-brand-primary bg-clip-text text-transparent"> تصمیم‌گیری هوشمندانه </span>
+              سازمان شما
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-text-secondary">
-              آتیوار به سازمان‌ها کمک می‌کند هزینه‌ها و فرایندهای خود را بهینه کنند، از دانش سازمانی بهتر استفاده کنند و راهکارهای مالی و هوشمند متناسب با نیاز خود بسازند؛ از مشاوره و طراحی تا اجرا و استقرار.
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-text-secondary">
+              آتیوار شریک سازمان‌ها در طراحی، استقرار و توسعه راهکارهای فین‌تک و هوش مصنوعی سازمانی است؛ از مشاوره راهبردی و معماری تا استقرار محیط‌های اختصاصی و هوشمندسازی فرایندها.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-9 flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
                 درخواست جلسه مشاوره
               </Link>
@@ -84,40 +92,95 @@ export default function HomePage() {
                 مشاهده خدمات و راهکارها
               </Link>
             </div>
+            <div className="mt-10 grid gap-4 sm:grid-cols-3">
+              <div className="rounded-2xl border border-border/70 bg-white/80 px-5 py-4 shadow-subtle backdrop-blur">
+                <p className="text-2xl font-bold text-text-primary">مسئله‌محور</p>
+                <p className="mt-1 text-sm text-text-secondary">قبل از فناوری، نیاز کسب‌وکار</p>
+              </div>
+              <div className="rounded-2xl border border-border/70 bg-white/80 px-5 py-4 shadow-subtle backdrop-blur">
+                <p className="text-2xl font-bold text-text-primary">کنترل‌شده</p>
+                <p className="mt-1 text-sm text-text-secondary">امنیت، دسترسی و نظارت انسانی</p>
+              </div>
+              <div className="rounded-2xl border border-border/70 bg-white/80 px-5 py-4 shadow-subtle backdrop-blur">
+                <p className="text-2xl font-bold text-text-primary">قابل اجرا</p>
+                <p className="mt-1 text-sm text-text-secondary">طراحی تا استقرار و انتقال دانش</p>
+              </div>
+            </div>
           </div>
-          <div className="relative">
-            <div className="card overflow-hidden">
-              <div className="relative h-[320px] w-full bg-gradient-to-br from-brand-light via-white to-brand-accentLight sm:h-[420px]">
-                <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 text-center">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="rounded-2xl border border-border bg-white px-6 py-4 shadow-subtle">
-                      <p className="text-sm text-text-secondary">داده‌های سازمان</p>
-                    </div>
-                    <div className="rounded-2xl border border-border bg-white px-6 py-4 shadow-subtle">
-                      <p className="text-sm text-text-secondary">سامانه‌های سازمانی</p>
-                    </div>
-                    <div className="rounded-2xl border border-brand-accent/40 bg-brand-accentLight px-6 py-4 shadow-subtle">
-                      <p className="text-sm font-medium text-brand-primary">محیط هوش مصنوعی اختصاصی</p>
-                    </div>
-                    <div className="rounded-2xl border border-brand-primary/40 bg-brand-blueLight px-6 py-4 shadow-subtle">
-                      <p className="text-sm font-medium text-brand-primary">تصمیم‌گیری مدیریتی</p>
-                    </div>
-                  </div>
-                  <p className="max-w-sm text-sm text-text-secondary">
-                    فناوری در خدمت سازمان، نه برعکس
-                  </p>
-                </div>
+          <div className="relative fade-in">
+            <div className="absolute -top-10 -left-6 h-24 w-24 rounded-full bg-brand-accent/10 blur-2xl" />
+            <div className="card relative overflow-hidden shadow-glow">
+              <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand-accent/60 to-transparent" />
+              <div className="relative h-[360px] w-full sm:h-[460px]">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(245,250,252,1),rgba(255,255,255,1))]" />
+                <div className="absolute inset-0 grid-glow opacity-40" />
+                <svg className="absolute inset-0 h-full w-full" viewBox="0 0 640 520" preserveAspectRatio="xMidYMid meet">
+                  <defs>
+                    <linearGradient id="line" x1="0" y1="0" x2="1" y2="0">
+                      <stop offset="0%" stopColor="rgba(18,175,193,0)" />
+                      <stop offset="50%" stopColor="rgba(18,175,193,0.6)" />
+                      <stop offset="100%" stopColor="rgba(23,107,155,0)" />
+                    </linearGradient>
+                  </defs>
+                  <g opacity="0.8">
+                    <circle cx="320" cy="260" r="150" fill="none" stroke="rgba(23,107,155,0.12)" strokeWidth="1" />
+                    <circle cx="320" cy="260" r="110" fill="none" stroke="rgba(18,175,193,0.14)" strokeWidth="1" />
+                    <circle cx="320" cy="260" r="72" fill="none" stroke="rgba(23,107,155,0.16)" strokeWidth="1" />
+                  </g>
+                  <g>
+                    <path d="M160 200 L240 230" stroke="url(#line)" strokeWidth="1" className="animate-pulse" />
+                    <path d="M480 200 L400 230" stroke="url(#line)" strokeWidth="1" className="animate-pulse" />
+                    <path d="M160 320 L240 290" stroke="url(#line)" strokeWidth="1" className="animate-pulse" />
+                    <path d="M480 320 L400 290" stroke="url(#line)" strokeWidth="1" className="animate-pulse" />
+                  </g>
+                  <g>
+                    <foreignObject x="110" y="170" width="110" height="60">
+                      <div className="flex h-full items-center justify-center rounded-2xl border border-border bg-white/90 px-3 text-center text-xs text-text-secondary shadow-subtle">
+                        داده‌های سازمان
+                      </div>
+                    </foreignObject>
+                    <foreignObject x="420" y="170" width="110" height="60">
+                      <div className="flex h-full items-center justify-center rounded-2xl border border-border bg-white/90 px-3 text-center text-xs text-text-secondary shadow-subtle">
+                        دانش سازمانی
+                      </div>
+                    </foreignObject>
+                    <foreignObject x="110" y="290" width="110" height="60">
+                      <div className="flex h-full items-center justify-center rounded-2xl border border-border bg-white/90 px-3 text-center text-xs text-text-secondary shadow-subtle">
+                        سامانه‌های عملیاتی
+                      </div>
+                    </foreignObject>
+                    <foreignObject x="420" y="290" width="110" height="60">
+                      <div className="flex h-full items-center justify-center rounded-2xl border border-border bg-white/90 px-3 text-center text-xs text-text-secondary shadow-subtle">
+                        فرایندهای کسب‌وکار
+                      </div>
+                    </foreignObject>
+                    <foreignObject x="255" y="230" width="130" height="70">
+                      <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-brand-accent/40 bg-gradient-to-br from-brand-accentLight to-white px-3 text-center shadow-card">
+                        <p className="text-sm font-semibold text-brand-primary">ATIVAR AI Workspace</p>
+                        <p className="mt-1 text-xs text-text-secondary">محیط اختصاصی کنترل‌شده</p>
+                      </div>
+                    </foreignObject>
+                    <foreignObject x="255" y="320" width="130" height="60">
+                      <div className="flex h-full items-center justify-center rounded-2xl border border-brand-primary/30 bg-brand-blueLight/70 px-3 text-center text-xs font-medium text-brand-primary shadow-subtle">
+                        تصمیم‌گیری هوشمندانه
+                      </div>
+                    </foreignObject>
+                  </g>
+                </svg>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="border-y border-border bg-white">
+      <section className="relative border-y border-border/70 bg-white/80 backdrop-blur">
         <div className="container-custom grid gap-6 py-8 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((item) => (
-            <div key={item.title} className="flex flex-col gap-2">
-              <h3 className="text-base font-semibold text-text-primary">{item.title}</h3>
+            <div key={item.title} className="group flex flex-col gap-2 rounded-2xl border border-transparent px-4 py-3 transition-all hover:border-border/80 hover:bg-white">
+              <div className="flex items-center gap-2">
+                <span className="h-1.5 w-1.5 rounded-full bg-brand-accent transition-transform group-hover:scale-125" />
+                <h3 className="text-base font-semibold text-text-primary">{item.title}</h3>
+              </div>
               <p className="text-sm leading-relaxed text-text-secondary">{item.desc}</p>
             </div>
           ))}
