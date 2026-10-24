@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "دانش و تحلیل",
   description: "مقالات تخصصی و کاربردی آتیوار برای مدیران در حوزه فین‌تک، هوش مصنوعی سازمانی و تحول دیجیتال.",
-};
+  path: "/insights",
+});
 
 const articles = [
   { title: "چگونه قبل از سرمایه‌گذاری در AI، توجیه اقتصادی آن را بسنجیم؟", cat: "هوش مصنوعی سازمانی" },

@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "سیاست حریم خصوصی",
   description: "سیاست حریم خصوصی وب‌سایت آتیوار در خصوص جمع‌آوری، استفاده و حفاظت از اطلاعات کاربران.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

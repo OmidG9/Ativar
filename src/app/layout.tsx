@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { siteConfig } from "@/lib/site";
 
 const vazirmatn = localFont({
   src: [
@@ -32,13 +33,13 @@ const vazirmatn = localFont({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://ativar.ir"),
+  metadataBase: new URL(siteConfig.url),
+  applicationName: siteConfig.name,
   title: {
     default: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و راهکارهای هوشمند کسب‌وکار",
     template: "%s | آتیوار",
   },
-  description:
-    "آتیوار مجموعه تخصصی مشاوره، طراحی و اجرای راهکارهای فین‌تک، معماری مالی دیجیتال و هوش مصنوعی سازمانی. از مشاوره و طراحی تا اجرا و بهره‌برداری.",
+  description: siteConfig.description,
   keywords: [
     "آتیوار",
     "ATIVAR",
@@ -49,22 +50,50 @@ export const metadata: Metadata = {
     "محیط اختصاصی هوش مصنوعی",
     "معماری راهکارهای سازمانی",
   ],
-  alternates: {
-    canonical: "/",
-  },
   openGraph: {
     type: "website",
     locale: "fa_IR",
-    url: "https://ativar.ir",
-    siteName: "آتیوار",
+    siteName: siteConfig.name,
     title: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و راهکارهای هوشمند کسب‌وکار",
-    description:
-      "شریک سازمان‌ها در طراحی، استقرار و توسعه زیرساخت‌های مالی دیجیتال و راهکارهای هوش مصنوعی سازمانی.",
+    description: siteConfig.description,
   },
   robots: {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg",
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#176B9B",
+  colorScheme: "light",
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteConfig.url}/#organization`,
+      name: siteConfig.name,
+      alternateName: siteConfig.nameEn,
+      url: siteConfig.url,
+      logo: `${siteConfig.url}/icon.svg`,
+      description: siteConfig.description,
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteConfig.url}/#website`,
+      url: siteConfig.url,
+      name: siteConfig.name,
+      inLanguage: "fa-IR",
+      publisher: { "@id": `${siteConfig.url}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -75,9 +104,18 @@ export default function RootLayout({
   return (
     <html lang="fa" dir="rtl" className={vazirmatn.variable}>
       <body className="font-sans">
+        <a href="#main-content" className="skip-link">
+          پرش به محتوای اصلی
+        </a>
         <Header />
-        <main className="min-h-[calc(100vh-320px)]">{children}</main>
+        <main id="main-content" tabIndex={-1} className="min-h-[60vh] outline-none">
+          {children}
+        </main>
         <Footer />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
       </body>
     </html>
   );

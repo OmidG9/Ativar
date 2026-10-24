@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "شرایط استفاده",
   description: "شرایط استفاده از وب‌سایت و خدمات آتیوار.",
-};
+  path: "/terms",
+});
 
 export default function TermsPage() {
   return (

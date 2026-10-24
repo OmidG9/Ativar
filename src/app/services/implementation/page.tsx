@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { EngagementJourney } from "@/components/diagrams/engagement-journey";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "طراحی و اجرای پروژه",
   description: "معماری، یکپارچه‌سازی، توسعه، استقرار و پشتیبانی راهکارهای تخصصی فناوری با دامنه کار شفاف و معیار پذیرش مشخص.",
-};
+  path: "/services/implementation",
+});
 
 const services = [
   "تحلیل نیازمندی",
@@ -57,6 +59,18 @@ export default function ImplementationPage() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-b border-border">
+        <div className="container-custom">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="section-title">مسیر همکاری در شش مرحله</h2>
+            <p className="max-w-md text-sm leading-7 text-text-secondary">
+              هر مرحله یک خروجی مشخص دارد و مرحله بعد پس از تأیید آن آغاز می‌شود.
+            </p>
+          </div>
+          <EngagementJourney />
         </div>
       </section>
 

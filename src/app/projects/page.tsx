@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "پروژه‌ها و تجربه‌ها",
   description: "مطالعات موردی و تجربه‌های واقعی آتیوار در حوزه فین‌تک، هوش مصنوعی سازمانی و اجرای پروژه‌های فناوری.",
-};
+  path: "/projects",
+});
 
 export default function ProjectsPage() {
   return (

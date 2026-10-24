@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { FintechCapabilityMap } from "@/components/diagrams/fintech-capability-map";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "راهکارهای فین‌تک",
   description: "طراحی راهکارهای مالی دیجیتال، معماری سامانه‌های مالی، زیرساخت خدمات مالی و مشاوره فین‌تک با تفکیک از فعالیت‌های نیازمند مجوز.",
-};
+  path: "/solutions/fintech",
+});
 
 const items = [
   { title: "مشاوره راهبردی فین‌تک", desc: "تحلیل بازار، مدل کسب‌وکار، نقشه راه و ارزیابی ریسک" },
@@ -33,6 +35,18 @@ export default function FintechPage() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-b border-border">
+        <div className="container-custom">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="section-title">نقشه قابلیت‌های فین‌تک</h2>
+            <p className="max-w-md text-sm leading-7 text-text-secondary">
+              چهار حوزه به‌هم‌پیوسته؛ از راهبرد و مدل کسب‌وکار تا معماری، داده و کنترل‌های لازم.
+            </p>
+          </div>
+          <FintechCapabilityMap />
         </div>
       </section>
 

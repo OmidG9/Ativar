@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/forms/contact-form";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "تماس و همکاری",
   description: "درخواست جلسه مشاوره، ارزیابی هوش مصنوعی سازمان، طراحی معماری یا اجرای پروژه با آتیوار.",
-};
+  path: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -55,8 +56,8 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="mt-6 rounded-xl bg-brand-accentLight p-4 text-sm text-text-primary">
-                <p className="font-medium">اصل اولویت</p>
-                <p className="mt-1 text-text-secondary">
+                <p className="font-semibold">اصل اولویت</p>
+                <p className="mt-1 text-text-primary">
                   مسئله سازمان مهم‌تر از انتخاب فناوری است. ابتدا مشکل را تعریف کنید، سپس راهکار بررسی می‌شود.
                 </p>
               </div>

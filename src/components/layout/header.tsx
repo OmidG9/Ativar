@@ -1,78 +1,107 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
+import { Logo } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
 
 const navItems = [
-  { href: "/services/consulting", label: "خدمات مشاوره" },
+  { href: "/services/consulting", label: "مشاوره" },
   { href: "/solutions/enterprise-ai", label: "هوش مصنوعی سازمانی" },
-  { href: "/products/ai-workspace", label: "محیط اختصاصی هوش مصنوعی" },
+  { href: "/products/ai-workspace", label: "AI Workspace" },
   { href: "/solutions/fintech", label: "فین‌تک" },
-  { href: "/projects", label: "پروژه‌ها و تجربه‌ها" },
+  { href: "/projects", label: "پروژه‌ها" },
   { href: "/about/team", label: "درباره آتیوار" },
-  { href: "/contact", label: "تماس با ما" },
 ];
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("keydown", onKeyDown);
+    return () => document.removeEventListener("keydown", onKeyDown);
+  }, [open]);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border">
-      <div className="container-custom flex items-center justify-between gap-4 py-4">
-        <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-brand-primary to-brand-accent text-white font-bold">
-            AT
-          </div>
-          <div className="flex flex-col leading-tight">
-            <span className="text-lg font-bold text-text-primary">آتیوار</span>
-            <span className="text-xs text-text-secondary">ATIVAR</span>
-          </div>
+    <header className="sticky top-0 z-50 border-b border-border/80 bg-white/90 backdrop-blur">
+      <div className="container-custom flex h-16 items-center justify-between gap-4">
+        <Link
+          href="/"
+          className="rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
+          aria-label="آتیوار ATIVAR، صفحه اصلی"
+        >
+          <Logo />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-6">
-          {navItems.map((item) => (
-            <Link
-              key={item.href}
-              href={item.href}
-              className="text-sm font-medium text-text-primary hover:text-brand-primary transition-colors"
-            >
-              {item.label}
-            </Link>
-          ))}
+        <nav aria-label="ناوبری اصلی" className="hidden items-center gap-6 lg:flex">
+          {navItems.map((item) => {
+            const active = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "rounded-md py-2 text-[13px] font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50",
+                  active ? "text-brand-primary" : "text-text-secondary hover:text-text-primary",
+                )}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
-        <div className="hidden lg:flex items-center gap-3">
-          <Link href="/contact" className="btn btn-primary">
-            درخواست جلسه مشاوره
+        <div className="hidden items-center gap-3 lg:flex">
+          <Link href="/contact" className="btn btn-primary px-5 py-2.5">
+            درخواست جلسه
           </Link>
         </div>
 
         <button
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border"
-          onClick={() => setOpen((v) => !v)}
-          aria-label="منوی ناوبری"
+          type="button"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-border text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50 lg:hidden"
+          onClick={() => setOpen((value) => !value)}
+          aria-expanded={open}
+          aria-controls="mobile-menu"
+          aria-label={open ? "بستن منو" : "باز کردن منو"}
         >
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+            {open ? (
+              <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            ) : (
+              <path d="M3 6h14M3 10h14M3 14h14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+            )}
           </svg>
         </button>
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-white">
-          <nav className="container-custom flex flex-col py-2">
+        <div id="mobile-menu" className="border-t border-border bg-white lg:hidden">
+          <nav aria-label="ناوبری موبایل" className="container-custom flex flex-col py-3">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
-                className="py-2 text-sm text-text-primary"
-                onClick={() => setOpen(false)}
+                aria-current={pathname === item.href ? "page" : undefined}
+                className="rounded-lg px-2 py-2.5 text-sm text-text-primary hover:bg-brand-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
               >
                 {item.label}
               </Link>
             ))}
-            <Link href="/contact" className="btn btn-primary mt-3 w-full" onClick={() => setOpen(false)}>
+            <Link href="/contact" className="btn btn-primary mt-3 w-full">
               درخواست جلسه مشاوره
             </Link>
           </nav>

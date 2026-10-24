@@ -1,10 +1,12 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { AiArchitectureMap } from "@/components/diagrams/ai-architecture-map";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "هوش مصنوعی سازمانی",
   description: "طراحی و استقرار محیط‌های هوش مصنوعی اختصاصی متناسب با دانش، داده، فرایندها و الزامات امنیتی سازمان.",
-};
+  path: "/solutions/enterprise-ai",
+});
 
 const caps = [
   "دستیار هوشمند اختصاصی سازمان",
@@ -38,6 +40,19 @@ export default function EnterpriseAIPage() {
               </Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-b border-border">
+        <div className="container-custom">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="section-title">معماری راهکار، از داده تا تصمیم</h2>
+            <p className="max-w-md text-sm leading-7 text-text-secondary">
+              راهکار در چهار لایه طراحی می‌شود و کنترل دسترسی، سیاست داده و نظارت انسانی در تمام
+              لایه‌ها اعمال می‌گردد.
+            </p>
+          </div>
+          <AiArchitectureMap />
         </div>
       </section>
 
@@ -85,8 +100,8 @@ export default function EnterpriseAIPage() {
                   <p className="mt-1 text-text-secondary">دانش سازمان به منبعی جست‌وجوپذیر و قابل استفاده تبدیل می‌شود</p>
                 </div>
                 <div className="rounded-xl border border-brand-accent/40 bg-brand-accentLight p-4">
-                  <p className="font-medium text-text-primary">سطح سوم: ATIVAR Enterprise LLM</p>
-                  <p className="mt-1 text-text-secondary">محیط هوش مصنوعی اختصاصی با کنترل و قابلیت توسعه</p>
+                  <p className="font-semibold text-text-primary">سطح سوم: ATIVAR Enterprise LLM</p>
+                  <p className="mt-1 text-text-primary">محیط هوش مصنوعی اختصاصی با کنترل و قابلیت توسعه</p>
                 </div>
               </div>
             </div>

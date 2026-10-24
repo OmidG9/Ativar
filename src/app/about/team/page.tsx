@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "DNA آتیوار",
   description: "معرفی تیم آتیوار، تخصص‌ها و رویکرد مسئله‌محور در مشاوره فین‌تک و هوش مصنوعی سازمانی.",
-};
+  path: "/about/team",
+});
 
 const members = [
   {
@@ -24,12 +25,6 @@ const members = [
     role: "فناوری و هوش مصنوعی",
     focus: ["هوش مصنوعی سازمانی", "معماری داده و یکپارچه‌سازی", "راهکارهای عملیاتی"],
     bio: "پروفایل بر اساس مستندات واقعی تکمیل خواهد شد.",
-  },
-  {
-    name: "آقای رسولی",
-    role: "مشاوره و توسعه کسب‌وکار",
-    focus: ["تحلیل نیازمندی سازمانی", "امکان‌سنجی و توسعه کسب‌وکار", "همکاری‌های استراتژیک"],
-    bio: "اطلاعات تکمیلی در صورت دریافت رزومه تأییدشده اضافه خواهد شد.",
   },
   {
     name: "حمید علیزاده",

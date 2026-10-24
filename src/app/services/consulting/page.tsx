@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "مشاوره و تحول دیجیتال",
   description: "خدمات مشاوره راهبردی فین‌تک، تحول دیجیتال، استراتژی هوش مصنوعی، معماری سازمانی و امکان‌سنجی فنی و اقتصادی آتیوار.",
-};
+  path: "/services/consulting",
+});
 
 const items = [
   { title: "مشاوره راهبردی فین‌تک", desc: "تحلیل بازار، طراحی مدل کسب‌وکار، تدوین نقشه راه و ارزیابی ریسک", out: "نقشه راه و اولویت‌های اجرایی" },

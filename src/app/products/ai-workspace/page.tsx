@@ -1,10 +1,11 @@
-import type { Metadata } from "next";
 import Link from "next/link";
+import { createMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata = createMetadata({
   title: "ATIVAR AI Workspace",
   description: "محیط اختصاصی هوش مصنوعی آتیوار؛ تبدیل دانش و اطلاعات سازمان به یک ابزار هوشمند قابل کنترل و توسعه.",
-};
+  path: "/products/ai-workspace",
+});
 
 export default function AIWorkspacePage() {
   return (
