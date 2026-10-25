@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
+import { CTA_LABELS } from "@/lib/cta";
 
 const groups = [
   {
@@ -17,7 +18,7 @@ const groups = [
     links: [
       { href: "/about/team", label: "DNA آتیوار" },
       { href: "/projects", label: "پروژه‌ها و تجربه‌ها" },
-      { href: "/insights", label: "دانش و تحلیل" },
+      { href: "/insights", label: "بینش‌ها و تحلیل" },
       { href: "/contact", label: "تماس و همکاری" },
     ],
   },
@@ -78,7 +79,7 @@ export function Footer() {
             href="/contact"
             className="rounded text-xs font-medium text-brand-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-accent/50"
           >
-            درخواست جلسه مشاوره ←
+            {CTA_LABELS.consult} ←
           </Link>
         </div>
       </div>

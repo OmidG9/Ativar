@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { Logo } from "@/components/brand/logo";
+import { CTA_LABELS } from "@/lib/cta";
 import { cn } from "@/lib/utils";
 
 type NavItem = {
@@ -52,7 +53,7 @@ export function Header() {
           <Logo />
         </Link>
 
-        <nav aria-label="ناوبری اصلی" className="hidden items-center gap-6 lg:flex">
+        <nav aria-label="ناوبری اصلی" className="hidden items-center gap-5 lg:flex">
           {navItems.map((item) => {
             const isExternal = item.external;
             const active = !isExternal && pathname === item.href;
@@ -86,8 +87,8 @@ export function Header() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <Link href="/contact" className="btn btn-primary px-5 py-2.5">
-            درخواست جلسه
+          <Link href="/contact" className="btn btn-primary whitespace-nowrap px-4 py-2.5">
+            {CTA_LABELS.consult}
           </Link>
         </div>
 
@@ -139,7 +140,7 @@ export function Header() {
               );
             })}
             <Link href="/contact" className="btn btn-primary mt-3 w-full">
-              درخواست جلسه مشاوره
+              {CTA_LABELS.consult}
             </Link>
           </nav>
         </div>

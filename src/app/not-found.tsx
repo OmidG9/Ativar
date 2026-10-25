@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CTA_LABELS } from "@/lib/cta";
 
 export default function NotFound() {
   return (
@@ -14,7 +15,7 @@ export default function NotFound() {
             بازگشت به صفحه اصلی
           </Link>
           <Link href="/contact" className="btn btn-outline">
-            درخواست جلسه مشاوره
+            {CTA_LABELS.consult}
           </Link>
         </div>
       </div>

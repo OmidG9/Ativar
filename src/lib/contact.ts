@@ -1,10 +1,13 @@
 export const REQUEST_TYPES = [
-  "درخواست جلسه مشاوره",
-  "درخواست ارزیابی هوش مصنوعی",
-  "درخواست طراحی معماری",
-  "درخواست اجرای پروژه",
-  "درخواست راهکار فین‌تک",
-  "درخواست همکاری راهبردی",
+  "مشاوره راهبردی و تحول دیجیتال",
+  "هوش مصنوعی سازمانی",
+  "تحلیل هوشمند داده",
+  "مدیریت دانش سازمانی",
+  "AI Workspace یا LLM سازمانی",
+  "فین‌تک",
+  "معماری و اجرای پروژه",
+  "توسعه خدمات هوشمند درآمدزا",
+  "سایر موارد",
 ] as const;
 
 export const PROJECT_SCALES = [
@@ -78,7 +81,8 @@ export function validateLead(body: Record<string, unknown>): {
 
   if (lead.fullName.length < 3) errors.fullName = "نام و نام خانوادگی را کامل وارد کنید.";
   if (!EMAIL_PATTERN.test(lead.email)) errors.email = "ایمیل کاری معتبر وارد کنید.";
-  if (lead.message.length < 20) errors.message = "شرح مسئله باید حداقل ۲۰ کاراکتر باشد.";
+  if (lead.message.length < 20)
+    errors.message = "شرح مسئله یا هدف سازمان باید حداقل ۲۰ کاراکتر باشد.";
   if (!lead.privacy) errors.privacy = "موافقت با سیاست حریم خصوصی الزامی است.";
   if (
     lead.requestType &&

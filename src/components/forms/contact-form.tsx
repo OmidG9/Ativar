@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { REQUEST_TYPES } from "@/lib/contact";
 
 type FormState = {
   fullName: string;
@@ -23,7 +24,7 @@ const initialState: FormState = {
   title: "",
   email: "",
   phone: "",
-  requestType: "درخواست جلسه مشاوره",
+  requestType: REQUEST_TYPES[0],
   projectScale: "هنوز مشخص نیست",
   timeline: "هنوز مشخص نیست",
   message: "",
@@ -40,6 +41,9 @@ const fieldOrder = [
   "message",
   "privacy",
 ] as const;
+
+const genericErrorMessage =
+  "در حال حاضر ثبت درخواست انجام نشد. لطفاً دوباره تلاش کنید.";
 
 function FieldError({ id, message }: { id: string; message?: string }) {
   if (!message) return null;
@@ -60,7 +64,7 @@ export function ContactForm() {
   useEffect(() => {
     const requestedType = new URLSearchParams(window.location.search).get("type");
     if (requestedType === "ai-workspace") {
-      setForm((previous) => ({ ...previous, requestType: "درخواست ارزیابی هوش مصنوعی" }));
+      setForm((previous) => ({ ...previous, requestType: "AI Workspace یا LLM سازمانی" }));
     }
   }, []);
 
@@ -94,7 +98,7 @@ export function ContactForm() {
       nextErrors.email = "ایمیل کاری معتبر وارد کنید.";
     }
     if (form.message.trim().length < 20) {
-      nextErrors.message = "شرح مسئله باید حداقل ۲۰ کاراکتر باشد.";
+      nextErrors.message = "شرح مسئله یا هدف سازمان باید حداقل ۲۰ کاراکتر باشد.";
     }
     if (!form.privacy) {
       nextErrors.privacy = "موافقت با سیاست حریم خصوصی الزامی است.";
@@ -133,7 +137,7 @@ export function ContactForm() {
           | null;
 
         if (data?.fields) setErrors(data.fields);
-        throw new Error(data?.error || "خطا در ارسال درخواست");
+        throw new Error(data?.error || genericErrorMessage);
       }
 
       setStatus("success");
@@ -143,7 +147,7 @@ export function ContactForm() {
       setError(
         submissionError instanceof Error && submissionError.message
           ? submissionError.message
-          : "متأسفانه در ارسال درخواست خطایی رخ داد. لطفاً دوباره تلاش کنید.",
+          : genericErrorMessage,
       );
     }
   };
@@ -151,9 +155,10 @@ export function ContactForm() {
   if (status === "success") {
     return (
       <div role="status" className="rounded-2xl border border-border bg-white p-8 text-center">
-        <h3 className="text-lg font-semibold text-text-primary">درخواست شما ثبت شد</h3>
+        <h3 className="text-lg font-semibold text-text-primary">درخواست شما با موفقیت ثبت شد</h3>
         <p className="mt-2 text-sm leading-7 text-text-secondary">
-          ممنون از تماس شما. همکاران آتیوار در اولین فرصت با شما ارتباط خواهند گرفت.
+          اطلاعات ارائه‌شده برای بررسی اولیه موضوع استفاده خواهد شد و در صورت نیاز، برای هماهنگی
+          مراحل بعدی با شما تماس گرفته می‌شود.
         </p>
         <button
           type="button"
@@ -258,7 +263,7 @@ export function ContactForm() {
 
         <div className="flex flex-col gap-2">
           <label htmlFor="requestType" className="text-sm font-medium text-text-primary">
-            نوع درخواست
+            موضوع درخواست
           </label>
           <select
             id="requestType"
@@ -267,12 +272,9 @@ export function ContactForm() {
             onChange={handleChange}
             className={inputClass}
           >
-            <option>درخواست جلسه مشاوره</option>
-            <option>درخواست ارزیابی هوش مصنوعی</option>
-            <option>درخواست طراحی معماری</option>
-            <option>درخواست اجرای پروژه</option>
-            <option>درخواست راهکار فین‌تک</option>
-            <option>درخواست همکاری راهبردی</option>
+            {REQUEST_TYPES.map((type) => (
+              <option key={type}>{type}</option>
+            ))}
           </select>
         </div>
 
@@ -316,7 +318,7 @@ export function ContactForm() {
 
       <div className="flex flex-col gap-2">
         <label htmlFor="message" className="text-sm font-medium text-text-primary">
-          شرح مسئله *
+          شرح کوتاه مسئله یا هدف سازمان *
         </label>
         <textarea
           id="message"
@@ -329,13 +331,14 @@ export function ContactForm() {
           aria-invalid={Boolean(errors.message)}
           aria-describedby={errors.message ? "message-error" : "message-hint"}
           className={inputClass}
-          placeholder="مسئله سازمان، هدف مورد انتظار و محدودیت‌های کلی را شرح دهید."
+          placeholder="مسئله یا هدف اصلی سازمان را به‌اختصار شرح دهید."
         />
         {errors.message ? (
           <FieldError id="message-error" message={errors.message} />
         ) : (
-          <p id="message-hint" className="text-xs text-text-secondary">
-            حداقل ۲۰ کاراکتر. اطلاعات محرمانه یا داده شخصی حساس ارسال نکنید.
+          <p id="message-hint" className="text-xs leading-6 text-text-secondary">
+            برای بررسی اولیه، کافی است مسئله یا هدف اصلی را به‌اختصار توضیح دهید. در این مرحله
+            نیازی به ارسال اطلاعات محرمانه، اسناد حساس یا داده‌های مشتریان نیست.
           </p>
         )}
       </div>
@@ -383,11 +386,8 @@ export function ContactForm() {
 
       <div className="flex flex-wrap items-center gap-4">
         <button type="submit" className="btn btn-primary" disabled={status === "submitting"}>
-          {status === "submitting" ? "در حال ارسال…" : "ارسال درخواست"}
+          {status === "submitting" ? "در حال ثبت…" : "ثبت درخواست مشاوره"}
         </button>
-        <p className="text-xs text-text-secondary">
-          پاسخ‌گویی در ساعات کاری، حداکثر تا یک روز کاری.
-        </p>
       </div>
     </form>
   );

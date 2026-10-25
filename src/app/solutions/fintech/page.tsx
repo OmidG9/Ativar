@@ -1,23 +1,55 @@
 import Link from "next/link";
 import { FintechCapabilityMap } from "@/components/diagrams/fintech-capability-map";
 import { ServiceDepth } from "@/components/sections/service-depth";
+import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
+import { faNumber } from "@/lib/number";
 
 export const metadata = createMetadata({
-  title: "راهکارهای فین‌تک",
-  description: "طراحی راهکارهای مالی دیجیتال، معماری سامانه‌های مالی، زیرساخت خدمات مالی و مشاوره فین‌تک با تفکیک از فعالیت‌های نیازمند مجوز.",
+  title: "مشاوره و معماری فین‌تک | طراحی و اجرای راهکارهای مالی",
+  description:
+    "مشاوره، طراحی معماری، یکپارچه‌سازی و اجرای راهکارهای فناوری مالی متناسب با نیاز کسب‌وکار و الزامات فنی و عملیاتی سازمان.",
   path: "/solutions/fintech",
 });
 
-const items = [
-  { title: "مشاوره راهبردی فین‌تک", desc: "تحلیل بازار، مدل کسب‌وکار، نقشه راه و ارزیابی ریسک" },
-  { title: "طراحی معماری سامانه‌های مالی دیجیتال", desc: "طراحی معماری سطح بالا، اجزا، جریان‌ها و یکپارچه‌سازی" },
-  { title: "زیرساخت‌های خدمات دیجیتال مالی", desc: "طراحی زیرساخت، امنیت، پایداری و مقیاس‌پذیری" },
-  { title: "راهکارهای دیجیتال بازار فلزات گران‌بها", desc: "بر پایه تجربه آغازین آتیوار در این حوزه" },
-  { title: "طراحی فرایندهای مرتبط با دارایی و وثیقه", desc: "بهینه‌سازی فرایندها با رویکرد کنترل و شفافیت" },
-  { title: "معماری API و یکپارچه‌سازی سامانه‌ها", desc: "طراحی اینترفیس‌های کنترل‌شده و مستندسازی" },
-  { title: "هوش مصنوعی در تحلیل اطلاعات مالی", desc: "کاربردهای هدفمند با نظارت انسانی" },
-  { title: "اتوماسیون فرایندهای مالی", desc: "کاهش فعالیت‌های تکراری با حفظ کنترل‌های لازم" },
+const services = [
+  {
+    title: "معماری سامانه‌های مالی",
+    description: "طراحی ساختار سامانه، اجزای کلیدی، جریان داده، ارتباطات فنی و نیازمندی‌های توسعه.",
+  },
+  {
+    title: "تحلیل و طراحی فرایندهای مالی دیجیتال",
+    description: "بررسی فرایندهای موجود، شناسایی گلوگاه‌ها و طراحی مسیر بهبود متناسب با نیاز کسب‌وکار.",
+  },
+  {
+    title: "یکپارچه‌سازی سامانه‌ها",
+    description:
+      "بررسی و طراحی ارتباط میان سامانه‌های منتخب، منابع اطلاعاتی و اجزای نرم‌افزاری بر اساس امکان فنی و الزامات دسترسی.",
+  },
+  {
+    title: "هوش مصنوعی در فرایندهای مالی",
+    description:
+      "بررسی کاربردهایی مانند تحلیل اسناد، استخراج اطلاعات، گزارش‌سازی، جست‌وجوی دانش و کمک به فعالیت‌های کارشناسی.",
+  },
+  {
+    title: "راهکارهای مرتبط با فلزات گران‌بها",
+    description:
+      "تجربه محصولی آتیوار در حوزه فلزات گران‌بها می‌تواند نقطه شروع معرفی توانمندی‌های مرتبط با سامانه‌های تخصصی این بازار باشد. دامنه قابلیت‌ها، نقش آتیوار و سوابق قابل انتشار بر اساس مستندات واقعی معرفی می‌شوند.",
+  },
+  {
+    title: "امکان‌سنجی و طراحی مسیر اجرا",
+    description:
+      "بررسی گزینه‌های فنی، هزینه‌ها، پیچیدگی اجرا، وابستگی‌ها و الزامات قانونی مرتبط با پروژه.",
+  },
+];
+
+const valuePoints = [
+  "شفاف‌تر شدن نیازمندی‌ها پیش از توسعه",
+  "کاهش ابهام در دامنه و معماری پروژه",
+  "بهبود هماهنگی میان سامانه‌ها",
+  "افزایش قابلیت نگهداری و توسعه راهکار",
+  "فراهم‌شدن امکان سنجش کیفیت و پذیرش پروژه",
+  "کاهش ریسک ناشی از تصمیم‌های فنی بدون امکان‌سنجی کافی",
 ];
 
 export default function FintechPage() {
@@ -26,20 +58,29 @@ export default function FintechPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <h1 className="section-title">طراحی راهکارهای مالی دیجیتال، از ایده تا اجرا</h1>
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">راهکارهای فین‌تک</p>
+            <h1 className="section-title mt-3">
+              طراحی و اجرای راهکارهای فناوری مالی متناسب با کسب‌وکار
+            </h1>
             <p className="section-subtitle">
-              آتیوار در حوزه مشاوره، معماری و فناوری فین‌تک فعالیت می‌کند. خدمات مشاوره و فناوری از فعالیت‌های مالی نیازمند مجوز به‌خوبی تفکیک شده‌اند.
+              در کسب‌وکارهای مالی، کیفیت معماری، یکپارچگی سامانه‌ها، قابلیت ردیابی عملیات و تناسب
+              فناوری با فرایندهای واقعی اهمیت زیادی دارد.
+            </p>
+            <p className="mt-4 text-base leading-8 text-text-secondary">
+              آتیوار در زمینه مشاوره، طراحی معماری و اجرای راهکارهای فنی و دیجیتال مرتبط با
+              کسب‌وکارهای مالی فعالیت می‌کند؛ با تمرکز بر شناخت نیاز، طراحی راهکار قابل توسعه و توجه
+              به الزامات عملیاتی، امنیتی و قانونی.
             </p>
             <div className="mt-8">
               <Link href="/contact" className="btn btn-primary">
-                درخواست بررسی راهکار فین‌تک
+                {CTA_LABELS.consult}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding border-b border-border">
+      <section className="section-padding border-y border-border">
         <div className="container-custom">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <h2 className="section-title">نقشه قابلیت‌های فین‌تک</h2>
@@ -51,14 +92,21 @@ export default function FintechPage() {
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light/60">
+      <section className="section-padding bg-brand-light/50">
         <div className="container-custom">
-          <h2 className="section-title">حوزه‌های فعالیت</h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-            {items.map((item) => (
-              <div key={item.title} className="card p-6">
-                <h3 className="text-base font-semibold text-text-primary">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">{item.desc}</p>
+          <div className="max-w-2xl">
+            <h2 className="section-title">خدمات فین‌تک</h2>
+            <p className="section-subtitle">
+              هر خدمت با دامنه روشن و خروجی قابل تعریف ارائه می‌شود؛ مرز خدمات فنی از فعالیت‌های
+              نیازمند مجوز جدا نگه داشته می‌شود.
+            </p>
+          </div>
+          <div className="mt-10 grid gap-x-10 sm:grid-cols-2">
+            {services.map((service, index) => (
+              <div key={service.title} className="border-t border-border py-6">
+                <p className="text-xs tabular-nums text-text-secondary">{faNumber(index + 1)}</p>
+                <h3 className="mt-2 text-base font-semibold text-text-primary">{service.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-text-secondary">{service.description}</p>
               </div>
             ))}
           </div>
@@ -67,10 +115,33 @@ export default function FintechPage() {
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="card p-8">
-            <h2 className="text-xl font-semibold text-text-primary">توضیح مهم درباره محدوده فعالیت</h2>
-            <p className="mt-4 text-sm leading-relaxed text-text-secondary">
-              آتیوار صرفاً در زمینه مشاوره فنی، طراحی معماری، تحلیل و پیاده‌سازی راهکارهای نرم‌افزاری فعالیت می‌کند. هیچ‌گونه ادعایی مبنی بر ارائه خدمات بانکی، پرداخت‌یار، کارگزاری، مؤسسه اعتباری، صادرکننده گواهی مالی یا سایر خدمات نیازمند مجوز در این وب‌سایت وجود ندارد. در صورت نیاز به فعالیت‌های مجوزمحور، الزام به داشتن مجوزهای قانونی لازم کاملاً مورد توجه قرار می‌گیرد.
+          <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div>
+              <h2 className="section-title">ارزش برای سازمان</h2>
+              <p className="section-subtitle">
+                هدف، ساخت سریع یک محصول نیست؛ ایجاد راهکاری است که بتواند با رشد کسب‌وکار و
+                الزامات جدید تکامل یابد.
+              </p>
+            </div>
+            <ul className="border-t border-border">
+              {valuePoints.map((item) => (
+                <li key={item} className="flex items-start gap-3 border-b border-border py-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent"
+                  />
+                  <span className="text-sm leading-7 text-text-primary">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="mt-12 rounded-2xl border border-brand-primary/20 bg-brand-light/60 p-6 sm:p-8">
+            <h3 className="text-base font-semibold text-text-primary">مرزبندی ضروری</h3>
+            <p className="mt-3 max-w-4xl text-sm leading-7 text-text-secondary">
+              خدمات آتیوار در حوزه فناوری و مشاوره مالی به‌خودی‌خود به معنای ارائه خدمات مالی
+              مجوزمحور نیست. هر فعالیتی که مستلزم مجوز یا تأیید قانونی باشد، باید بر اساس الزامات
+              مربوط و وضعیت مجوزهای لازم بررسی شود.
             </p>
           </div>
         </div>
@@ -183,10 +254,10 @@ export default function FintechPage() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست بررسی راهکار
+                {CTA_LABELS.consult}
               </Link>
-              <Link href="/services/consulting" className="btn btn-outline">
-                مشاوره و تحول دیجیتال
+              <Link href="/services/implementation" className="btn btn-outline">
+                بررسی معماری و اجرای پروژه
               </Link>
             </div>
           </div>

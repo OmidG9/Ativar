@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { caseStudies, getCaseStudy } from "@/content/case-studies";
+import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
 
@@ -144,7 +145,7 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
                     ))}
                   </dl>
                   <Link href="/contact" className="btn btn-primary mt-6 w-full">
-                    بررسی پروژه مشابه
+                    {CTA_LABELS.talk}
                   </Link>
                 </div>
               </aside>
@@ -165,10 +166,10 @@ export default async function CaseStudyPage({ params }: CaseStudyPageProps) {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست جلسه مشاوره
+                {CTA_LABELS.talk}
               </Link>
               <Link href="/solutions/fintech" className="btn btn-outline">
-                راهکارهای فین‌تک
+                {CTA_LABELS.fintech}
               </Link>
             </div>
           </div>

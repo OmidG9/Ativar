@@ -109,7 +109,7 @@ export async function POST(request: Request) {
         report.results.map((result) => `${result.channel}: ${result.error}`).join(" | "),
       );
       return NextResponse.json(
-        { error: "ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید." },
+        { error: "در حال حاضر ثبت درخواست انجام نشد. لطفاً دوباره تلاش کنید." },
         { status: 502 },
       );
     }
@@ -131,7 +131,7 @@ export async function POST(request: Request) {
       error instanceof Error ? error.message : "unknown error",
     );
     return NextResponse.json(
-      { error: "ارسال درخواست انجام نشد. لطفاً دوباره تلاش کنید." },
+      { error: "در حال حاضر ثبت درخواست انجام نشد. لطفاً دوباره تلاش کنید." },
       { status: 502 },
     );
   }

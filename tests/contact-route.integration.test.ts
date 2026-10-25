@@ -78,7 +78,7 @@ describe("POST /api/contact", () => {
         title: "مدیر فناوری",
         email: "sara@example.com",
         phone: "02100000000",
-        requestType: "درخواست جلسه مشاوره",
+        requestType: "مشاوره راهبردی و تحول دیجیتال",
         projectScale: "هنوز مشخص نیست",
         timeline: "۱ تا ۳ ماه",
         message: "برای طراحی معماری راهکار هوش مصنوعی نیاز به مشاوره داریم.",

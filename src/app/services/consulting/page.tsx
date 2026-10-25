@@ -1,20 +1,77 @@
 import Link from "next/link";
 import { ServiceDepth } from "@/components/sections/service-depth";
+import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
+import { faNumber } from "@/lib/number";
 
 export const metadata = createMetadata({
   title: "مشاوره و تحول دیجیتال",
-  description: "خدمات مشاوره راهبردی فین‌تک، تحول دیجیتال، استراتژی هوش مصنوعی، معماری سازمانی و امکان‌سنجی فنی و اقتصادی آتیوار.",
+  description:
+    "خدمات مشاوره راهبردی فین‌تک، تحول دیجیتال، راهبرد هوش مصنوعی سازمانی، معماری سازمانی و امکان‌سنجی فنی و اقتصادی آتیوار.",
   path: "/services/consulting",
 });
 
-const items = [
-  { title: "مشاوره راهبردی فین‌تک", desc: "تحلیل بازار، طراحی مدل کسب‌وکار، تدوین نقشه راه و ارزیابی ریسک", out: "نقشه راه و اولویت‌های اجرایی" },
-  { title: "مشاوره تحول دیجیتال", desc: "ارزیابی بلوغ دیجیتال، بازطراحی فرایندها و اولویت‌بندی سرمایه‌گذاری‌های فناوری", out: "برنامه تحول دیجیتال" },
-  { title: "استراتژی هوش مصنوعی", desc: "شناسایی کاربردهای مناسب، ارزیابی آمادگی داده و تدوین نقشه راه استقرار AI", out: "نقشه راه هوش مصنوعی سازمانی" },
-  { title: "معماری سازمانی و فناوری", desc: "طراحی معماری کسب‌وکار، داده، نرم‌افزار، زیرساخت و یکپارچه‌سازی", out: "سند معماری سازمانی" },
-  { title: "امکان‌سنجی فنی و اقتصادی", desc: "تحلیل هزینه کل مالکیت، ROI، ریسک‌ها و گزینه‌های فنی", out: "گزارش امکان‌سنجی و برآورد" },
-  { title: "حاکمیت فناوری و داده", desc: "چارچوب مدیریت دسترسی، امنیت، کیفیت داده، ارزیابی مدل و کنترل ریسک", out: "چارچوب حاکمیت فناوری و داده" },
+const services = [
+  {
+    title: "مشاوره راهبردی فین‌تک",
+    description:
+      "بررسی فرصت‌های فناوری مالی، تحلیل نیازهای کسب‌وکار، طراحی مدل عملیاتی و تدوین نقشه راه توسعه راهکارهای دیجیتال مالی.",
+    outputs: [
+      "تحلیل مسئله و نیاز کسب‌وکار",
+      "بررسی گزینه‌های فنی و عملیاتی",
+      "ارزیابی اولیه هزینه، ریسک و پیچیدگی",
+      "طراحی معماری مفهومی",
+      "تدوین نقشه راه اجرا",
+      "تعیین وابستگی‌ها و الزامات یکپارچه‌سازی",
+    ],
+  },
+  {
+    title: "مشاوره تحول دیجیتال",
+    description:
+      "کمک به سازمان برای شناسایی فرایندهای قابل بهبود، تعیین اولویت‌های تحول و طراحی مسیر اجرایی متناسب با ظرفیت سازمان.",
+    outputs: [
+      "ارزیابی وضعیت موجود",
+      "شناسایی گلوگاه‌ها و دوباره‌کاری‌ها",
+      "تحلیل فرایندهای اولویت‌دار",
+      "تعریف وضعیت هدف",
+      "تدوین نقشه راه مرحله‌ای",
+      "تعریف شاخص‌های ارزیابی پیشرفت",
+    ],
+  },
+  {
+    title: "راهبرد هوش مصنوعی سازمانی",
+    description:
+      "شناسایی موارد استفاده مناسب از هوش مصنوعی و تعیین اینکه کدام مسئله ارزش اجرای آزمایشی یا استقرار عملیاتی دارد.",
+    outputs: [
+      "ارزیابی آمادگی سازمان",
+      "اولویت‌بندی موارد استفاده",
+      "بررسی منابع داده و دانش",
+      "ارزیابی گزینه‌های مدل و زیرساخت",
+      "تحلیل ریسک‌های امنیتی و عملیاتی",
+      "طراحی برنامه اجرای آزمایشی",
+      "تعریف شاخص‌های سنجش ارزش",
+    ],
+  },
+  {
+    title: "معماری سازمانی و سامانه‌ها",
+    description:
+      "طراحی ساختار کلان راهکارها و ارتباط میان سامانه‌ها، داده‌ها، کاربران و فرایندها؛ با هدف کاهش پیچیدگی، افزایش قابلیت توسعه و روشن‌شدن وابستگی‌های فنی.",
+  },
+  {
+    title: "امکان‌سنجی فنی و اقتصادی",
+    description:
+      "ارزیابی گزینه‌های اجرایی از نظر هزینه، پیچیدگی، منابع مورد نیاز، ریسک، زمان‌بندی و ارزش اقتصادی مورد انتظار.",
+    note: "هدف: جلوگیری از تصمیم‌های پرهزینه‌ای که بدون شناخت کافی از نیاز، محدودیت‌ها و مسیر اجرا اتخاذ می‌شوند.",
+  },
+];
+
+const managerValue = [
+  "شفاف‌تر شدن مسئله‌ای که قرار است حل شود",
+  "امکان مقایسه گزینه‌ها پیش از سرمایه‌گذاری",
+  "اولویت‌بندی پروژه‌ها بر اساس اهمیت و امکان اجرا",
+  "مشخص‌شدن منابع، وابستگی‌ها و ریسک‌ها",
+  "تعیین شاخص‌های قابل سنجش برای ارزیابی نتیجه",
+  "ایجاد زبان مشترک میان مدیریت، کسب‌وکار و فناوری اطلاعات",
 ];
 
 export default function ConsultingPage() {
@@ -23,33 +80,87 @@ export default function ConsultingPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <h1 className="section-title">مشاوره و تحول دیجیتال</h1>
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">مشاوره و تحول دیجیتال</p>
+            <h1 className="section-title mt-3">تصمیم‌های راهبردی را به برنامه اجرایی تبدیل کنید</h1>
             <p className="section-subtitle">
-              قبل از سرمایه‌گذاری در فناوری، مسئله را شناسایی، راهکار را طراحی و توجیه اقتصادی را بررسی می‌کنیم.
+              تحول دیجیتال با خرید فناوری آغاز نمی‌شود؛ با شناخت مسئله، تعیین اولویت‌ها و طراحی
+              مسیری آغاز می‌شود که با اهداف، منابع و توان اجرایی سازمان سازگار باشد.
+            </p>
+            <p className="mt-4 text-base leading-8 text-text-secondary">
+              آتیوار در حوزه مشاوره راهبردی فناوری، تحول دیجیتال، هوش مصنوعی سازمانی و راهکارهای
+              فین‌تک به سازمان‌ها کمک می‌کند فرصت‌ها را ارزیابی کنند، گزینه‌های پیش رو را بسنجند و
+              برای اجرای تصمیم‌ها برنامه‌ای روشن داشته باشند.
             </p>
             <div className="mt-8">
               <Link href="/contact" className="btn btn-primary">
-                درخواست جلسه مشاوره
+                {CTA_LABELS.consult}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light/60">
+      <section className="section-padding border-y border-border bg-brand-light/50">
         <div className="container-custom">
-          <h2 className="section-title">خدمات مشاوره‌ای</h2>
-          <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {items.map((item) => (
-              <div key={item.title} className="card flex h-full flex-col p-6">
-                <h3 className="text-lg font-semibold text-text-primary">{item.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">{item.desc}</p>
-                <div className="mt-4 rounded-xl bg-white px-4 py-3">
-                  <p className="text-xs text-text-secondary">خروجی قابل تحویل</p>
-                  <p className="mt-1 text-sm font-medium text-text-primary">{item.out}</p>
+          <h2 className="section-title">خدمات مشاوره‌ای آتیوار</h2>
+          <div className="mt-10 border-t border-border">
+            {services.map((service, index) => (
+              <div
+                key={service.title}
+                className="grid gap-4 border-b border-border py-7 lg:grid-cols-[3rem_minmax(0,1fr)_minmax(0,1fr)] lg:gap-8"
+              >
+                <span className="text-sm tabular-nums text-brand-primary">{faNumber(index + 1)}</span>
+                <div>
+                  <h3 className="text-lg font-semibold text-text-primary">{service.title}</h3>
+                  <p className="mt-2 text-sm leading-7 text-text-secondary">{service.description}</p>
+                  {service.note && (
+                    <p className="mt-3 rounded-xl border border-border bg-white px-4 py-3 text-xs leading-6 text-text-secondary">
+                      {service.note}
+                    </p>
+                  )}
                 </div>
+                {service.outputs && (
+                  <div className="rounded-xl border border-border bg-white p-5">
+                    <p className="text-xs font-semibold text-text-secondary">خروجی‌های قابل تعریف</p>
+                    <ul className="mt-3 space-y-2 text-sm text-text-primary">
+                      {service.outputs.map((output) => (
+                        <li key={output} className="flex items-start gap-2 leading-6">
+                          <span
+                            aria-hidden="true"
+                            className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-accent"
+                          />
+                          {output}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
+          </div>
+          <p className="mt-6 text-sm leading-7 text-text-secondary">
+            نوع و سطح هر خروجی پیش از شروع همکاری در پیشنهاد فنی و قرارداد مشخص می‌شود.
+          </p>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">ارزش برای مدیران ارشد</p>
+            <h2 className="section-title mt-3">چه چیزی برای تصمیم‌گیری مدیریتی تغییر می‌کند</h2>
+          </div>
+          <ul className="mt-10 grid gap-x-10 border-t border-border sm:grid-cols-2">
+            {managerValue.map((item) => (
+              <li key={item} className="border-b border-border py-4 text-sm leading-7 text-text-primary">
+                {item}
+              </li>
+            ))}
+          </ul>
+          <div className="mt-8">
+            <Link href="/contact" className="btn btn-primary">
+              {CTA_LABELS.consult}
+            </Link>
           </div>
         </div>
       </section>
@@ -162,10 +273,10 @@ export default function ConsultingPage() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست جلسه مشاوره
+                {CTA_LABELS.consult}
               </Link>
               <Link href="/services/implementation" className="btn btn-outline">
-                طراحی و اجرا
+                بررسی معماری و اجرای پروژه
               </Link>
             </div>
           </div>

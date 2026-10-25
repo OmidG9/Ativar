@@ -57,7 +57,7 @@ export default function OpengraphImage() {
               maxWidth: 900,
             }}
           >
-            AI infrastructure for better decisions
+            Enterprise AI and FinTech for better business performance
           </div>
           <div style={{ fontSize: 26, color: "#607482" }}>
             Consulting · Architecture · Enterprise AI · FinTech

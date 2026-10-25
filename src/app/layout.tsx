@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   applicationName: siteConfig.name,
   title: {
-    default: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و راهکارهای هوشمند کسب‌وکار",
+    default: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و تحول دیجیتال",
     template: "%s | آتیوار",
   },
   description: siteConfig.description,
@@ -48,6 +48,8 @@ export const metadata: Metadata = {
     "هوش مصنوعی سازمانی",
     "راهکارهای مالی دیجیتال",
     "تحول دیجیتال سازمانی",
+    "تحلیل داده سازمانی",
+    "مدیریت دانش سازمانی",
     "محیط اختصاصی هوش مصنوعی",
     "معماری راهکارهای سازمانی",
   ],
@@ -55,7 +57,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "fa_IR",
     siteName: siteConfig.name,
-    title: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و راهکارهای هوشمند کسب‌وکار",
+    title: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و تحول دیجیتال",
     description: siteConfig.description,
   },
   robots: {
@@ -63,12 +65,26 @@ export const metadata: Metadata = {
     follow: true,
   },
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: [
+      { url: "/brand/favicon-32.png", type: "image/png", sizes: "32x32" },
+      { url: "/brand/favicon-16.png", type: "image/png", sizes: "16x16" },
+      { url: "/brand/favicon-48.png", type: "image/png", sizes: "48x48" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: [
+      {
+        url: "/brand/apple-touch-icon.png",
+        type: "image/png",
+        sizes: "180x180",
+      },
+    ],
   },
   ...(process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
-    ? { verification: { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION } }
+    ? {
+        verification: {
+          google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+        },
+      }
     : {}),
 };
 
@@ -86,7 +102,7 @@ const organizationJsonLd = {
       name: siteConfig.name,
       alternateName: siteConfig.nameEn,
       url: siteConfig.url,
-      logo: `${siteConfig.url}/icon.svg`,
+      logo: `${siteConfig.url}/brand/ativar-logo.png`,
       description: siteConfig.description,
     },
     {
@@ -112,14 +128,20 @@ export default function RootLayout({
           پرش به محتوای اصلی
         </a>
         <Header />
-        <main id="main-content" tabIndex={-1} className="min-h-[60vh] outline-none">
+        <main
+          id="main-content"
+          tabIndex={-1}
+          className="min-h-[60vh] outline-none"
+        >
           {children}
         </main>
         <Footer />
         <Analytics />
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationJsonLd),
+          }}
         />
       </body>
     </html>

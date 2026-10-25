@@ -1,26 +1,57 @@
 import Link from "next/link";
 import { EngagementJourney } from "@/components/diagrams/engagement-journey";
 import { ServiceDepth } from "@/components/sections/service-depth";
+import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
+import { faNumber } from "@/lib/number";
 
 export const metadata = createMetadata({
-  title: "طراحی و اجرای پروژه",
-  description: "معماری، یکپارچه‌سازی، توسعه، استقرار و پشتیبانی راهکارهای تخصصی فناوری با دامنه کار شفاف و معیار پذیرش مشخص.",
+  title: "معماری و اجرای پروژه",
+  description:
+    "تبدیل نیاز کسب‌وکار به مشخصات فنی، معماری، برنامه اجرا و راهکار عملیاتی؛ با دامنه کار شفاف و معیار پذیرش مشخص.",
   path: "/services/implementation",
 });
 
 const services = [
-  "تحلیل نیازمندی",
-  "طراحی معماری راهکار",
-  "تهیه اسناد فنی و RFP",
-  "انتخاب فناوری و طراحی زیرساخت",
-  "مدیریت پروژه",
-  "مدیریت پیمانکاران",
-  "توسعه و یکپارچه‌سازی سامانه‌ها",
-  "پیاده‌سازی راهکارهای هوش مصنوعی",
-  "آزمون امنیت و کیفیت",
-  "استقرار و انتقال دانش",
-  "پشتیبانی و بهبود مستمر",
+  {
+    title: "تحلیل نیازمندی‌ها",
+    description: "مستندسازی نیازهای کسب‌وکار، کاربران، محدودیت‌ها و معیارهای پذیرش.",
+  },
+  {
+    title: "طراحی معماری راهکار",
+    description: "تعریف اجزای سامانه، جریان اطلاعات، ارتباطات فنی، الزامات امنیتی و قابلیت توسعه.",
+  },
+  {
+    title: "تدوین اسناد فنی و RFP",
+    description: "تهیه مستندات لازم برای انتخاب تأمین‌کننده، مقایسه پیشنهادها و تعریف انتظارات اجرایی.",
+  },
+  {
+    title: "مدیریت و راهبری پروژه",
+    description: "تعیین مراحل، وابستگی‌ها، مسئولیت‌ها، نقاط کنترل و سازوکار گزارش‌دهی.",
+  },
+  {
+    title: "توسعه و یکپارچه‌سازی",
+    description:
+      "اجرای اجزای توافق‌شده و اتصال راهکار به سامانه‌های موجود، متناسب با دامنه قرارداد و توان اجرایی.",
+  },
+  {
+    title: "آزمون و پذیرش",
+    description: "تعریف سناریوهای آزمون، معیارهای پذیرش، مستندسازی نتایج و پیگیری رفع اشکالات.",
+  },
+  {
+    title: "استقرار و انتقال دانش",
+    description: "آماده‌سازی بهره‌برداری، مستندسازی فنی و انتقال دانش لازم به تیم داخلی.",
+  },
+];
+
+const outputs = [
+  "سند نیازمندی‌ها",
+  "سند معماری راهکار",
+  "نقشه راه اجرا",
+  "برنامه زمان‌بندی و وابستگی‌ها",
+  "مستندات یکپارچه‌سازی",
+  "برنامه آزمون و معیارهای پذیرش",
+  "مستندات بهره‌برداری و انتقال دانش",
 ];
 
 const models = [
@@ -37,33 +68,68 @@ export default function ImplementationPage() {
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <h1 className="section-title">طراحی و اجرای پروژه‌های فناوری سازمانی</h1>
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">
+              معماری و اجرای پروژه
+            </p>
+            <h1 className="section-title mt-3">از نیاز کسب‌وکار تا راهکار قابل اجرا</h1>
             <p className="section-subtitle">
-              از تعریف مسئله تا استقرار و انتقال دانش؛ با دامنه کار شفاف، معیارهای پذیرش مشخص و مسئولیت‌های تعریف‌شده.
+              موفقیت یک پروژه فناوری تنها به انتخاب نرم‌افزار یا ابزار مناسب وابسته نیست. تعریف دقیق
+              مسئله، طراحی معماری، تعیین دامنه، مدیریت وابستگی‌ها و آزمون خروجی‌ها نقش مهمی در
+              کیفیت نهایی پروژه دارند.
+            </p>
+            <p className="mt-4 text-base leading-8 text-text-secondary">
+              آتیوار به سازمان‌ها کمک می‌کند نیازهای کسب‌وکار را به مشخصات اجرایی روشن تبدیل کنند و
+              مسیر طراحی، توسعه، یکپارچه‌سازی و استقرار را با چارچوبی قابل پیگیری پیش ببرند.
             </p>
             <div className="mt-8">
               <Link href="/contact" className="btn btn-primary">
-                درخواست بررسی و برآورد پروژه
+                {CTA_LABELS.technicalProposal}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="section-padding bg-brand-light/60">
+      <section className="section-padding border-y border-border bg-brand-light/50">
         <div className="container-custom">
-          <h2 className="section-title">خدمات اجرایی</h2>
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {services.map((item) => (
-              <div key={item} className="card p-4">
-                <p className="text-sm font-medium text-text-primary">{item}</p>
+          <h2 className="section-title">خدمات</h2>
+          <div className="mt-10 grid gap-x-10 sm:grid-cols-2">
+            {services.map((service, index) => (
+              <div key={service.title} className="border-t border-border py-5">
+                <p className="text-xs tabular-nums text-text-secondary">{faNumber(index + 1)}</p>
+                <h3 className="mt-2 text-base font-semibold text-text-primary">{service.title}</h3>
+                <p className="mt-2 text-sm leading-7 text-text-secondary">{service.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      <section className="section-padding border-b border-border">
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div>
+              <h2 className="section-title">خروجی‌های قابل تعریف</h2>
+              <p className="section-subtitle">
+                نوع و سطح هر خروجی در قرارداد پروژه تعیین می‌شود.
+              </p>
+            </div>
+            <ul className="border-t border-border">
+              {outputs.map((output) => (
+                <li key={output} className="flex items-start gap-3 border-b border-border py-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent"
+                  />
+                  <span className="text-sm leading-7 text-text-primary">{output}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-y border-border bg-brand-light/50">
         <div className="container-custom">
           <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <h2 className="section-title">مسیر همکاری در شش مرحله</h2>
@@ -87,7 +153,8 @@ export default function ImplementationPage() {
             ))}
           </div>
           <p className="mt-6 text-sm text-text-secondary">
-            در هر پروژه، دامنه کار، معیارهای پذیرش، زمان‌بندی، مسئولیت‌ها، الزامات امنیتی و نحوه نظارت پیش از شروع توافق می‌شود.
+            در هر پروژه، دامنه کار، معیارهای پذیرش، زمان‌بندی، مسئولیت‌ها، الزامات امنیتی و نحوه
+            نظارت پیش از شروع توافق می‌شود.
           </p>
         </div>
       </section>
@@ -199,16 +266,16 @@ export default function ImplementationPage() {
             <div>
               <h2 className="text-2xl font-bold text-text-primary">برای برآورد پروژه آماده‌اید؟</h2>
               <p className="mt-2 max-w-xl text-sm leading-7 text-text-secondary">
-                دامنه اولیه، محدودیت‌ها و زمان‌بندی مورد انتظار را برای ما بنویسید تا گام بعدی را
-                با هم مشخص کنیم.
+                دامنه اولیه، محدودیت‌ها و زمان‌بندی مورد انتظار را برای ما بنویسید تا گام بعدی را با
+                هم مشخص کنیم.
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست بررسی و برآورد
+                {CTA_LABELS.technicalProposal}
               </Link>
               <Link href="/solutions/enterprise-ai" className="btn btn-outline">
-                راهکار هوش مصنوعی
+                راهکار هوش مصنوعی سازمانی
               </Link>
             </div>
           </div>

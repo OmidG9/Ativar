@@ -1,13 +1,38 @@
 import Link from "next/link";
 import { AiArchitectureMap } from "@/components/diagrams/ai-architecture-map";
 import { ServiceDepth } from "@/components/sections/service-depth";
+import { serviceLines } from "@/content/service-lines";
+import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
+import { faNumber } from "@/lib/number";
 
 export const metadata = createMetadata({
-  title: "هوش مصنوعی سازمانی",
-  description: "طراحی و استقرار محیط‌های هوش مصنوعی اختصاصی متناسب با دانش، داده، فرایندها و الزامات امنیتی سازمان.",
+  title: "هوش مصنوعی سازمانی | تحلیل داده، مدیریت دانش و LLM",
+  description:
+    "راهکارهای هوش مصنوعی سازمانی آتیوار برای تحلیل داده، مدیریت دانش، دستیارهای تخصصی و طراحی محیط هوش مصنوعی متناسب با نیاز و زیرساخت سازمان.",
   path: "/solutions/enterprise-ai",
 });
+
+const levels = [
+  {
+    title: "ATIVAR Data Intelligence",
+    tagline: "از داده به تصمیم",
+    description:
+      "سامان‌دهی و تحلیل داده‌های سازمان برای تهیه گزارش‌های مدیریتی منسجم‌تر، شناسایی روندها و مغایرت‌ها و پشتیبانی از تصمیم‌گیری.",
+  },
+  {
+    title: "ATIVAR Knowledge Intelligence",
+    tagline: "از دانش به دسترسی",
+    description:
+      "تبدیل اسناد، دستورالعمل‌ها و دانش سازمانی به پایگاه دانشی قابل جست‌وجو، همراه با پاسخ‌های مستند در صورت پیاده‌سازی قابلیت ارجاع به منابع.",
+  },
+  {
+    title: "ATIVAR Enterprise LLM",
+    tagline: "از هوش مصنوعی به خدمت",
+    description:
+      "طراحی محیط هوش مصنوعی سازمانی برای توسعه دستیارهای تخصصی، اتصال به منابع مجاز و پیاده‌سازی گردش‌کارها و خدمات هوشمند.",
+  },
+];
 
 const caps = [
   "دستیار هوشمند اختصاصی سازمان",
@@ -22,24 +47,69 @@ const caps = [
   "استقرار در زیرساخت مناسب سازمان",
 ];
 
+const benefits = [
+  "گزارش‌گیری سریع‌تر و دسترسی بهتر به اطلاعات",
+  "کاهش فعالیت‌های دستی و تکراری در موارد منتخب",
+  "دسترسی مؤثرتر به دانش و تجربه سازمان",
+  "توسعه دستیارهای متناسب با نیاز واحدها",
+  "امکان طراحی معماری مبتنی بر زیرساخت داخلی، در صورت تناسب فنی",
+  "امکان توسعه خدمات هوشمند برای شرکت‌های تابعه و مشتریان",
+  "قابلیت تعریف شاخص برای سنجش کیفیت، استفاده و ارزش اقتصادی",
+];
+
 export default function EnterpriseAIPage() {
   return (
     <>
       <section className="section-padding">
         <div className="container-custom">
           <div className="max-w-3xl">
-            <h1 className="section-title">هوش مصنوعی اختصاصی؛ متناسب با دانش، داده و فرایند سازمان شما</h1>
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">ATIVAR Enterprise AI</p>
+            <h1 className="section-title mt-3">سازمان خود را در سه سطح به هوش مصنوعی مجهز کنید</h1>
+            <p className="mt-4 text-sm font-medium text-brand-primary">
+              از داده تا دانش، از دانش تا هوش مصنوعی اختصاصی
+            </p>
             <p className="section-subtitle">
-              آتیوار به سازمان‌ها کمک می‌کند محیط‌های هوش مصنوعی متناسب با نیازهای عملیاتی خود ایجاد کنند؛ محیط‌هایی که می‌توانند به دانش سازمان متصل شوند، وظایف تخصصی را پشتیبانی کنند و با رعایت سیاست‌های امنیتی و سطوح دسترسی به کار گرفته شوند.
+              آتیوار به سازمان‌ها کمک می‌کند داده‌ها را به بینش مدیریتی، دانش را به دارایی قابل
+              استفاده و هوش مصنوعی را به قابلیتی عملیاتی و قابل توسعه تبدیل کنند.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست ارزیابی هوش مصنوعی سازمان
+                {CTA_LABELS.aiAssessment}
               </Link>
               <Link href="/products/ai-workspace" className="btn btn-outline">
-                معرفی ATIVAR AI Workspace
+                {CTA_LABELS.workspace}
               </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="levels" className="section-padding scroll-mt-20 border-y border-border bg-brand-light/50">
+        <div className="container-custom">
+          <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+            <h2 className="section-title">سه سطح خدمات آتیوار</h2>
+            <p className="max-w-md text-sm leading-7 text-text-secondary">
+              سازمان می‌تواند از هر یک از سه سطح آغاز کند. انتخاب مسیر مناسب به نیاز واقعی، وضعیت
+              داده، آمادگی زیرساخت، الزامات امنیتی و اهداف اقتصادی بستگی دارد.
+            </p>
+          </div>
+          <div className="mt-10 border-t border-border">
+            {levels.map((level, index) => (
+              <div
+                key={level.title}
+                className="grid gap-3 border-b border-border py-7 sm:grid-cols-[3rem_minmax(0,1fr)] sm:gap-6"
+              >
+                <span className="text-sm tabular-nums text-brand-primary">{faNumber(index + 1)}</span>
+                <div>
+                  <p className="text-xs font-medium text-text-secondary">سطح {faNumber(index + 1)}</p>
+                  <h3 className="mt-1 text-lg font-semibold text-text-primary">{level.title}</h3>
+                  <p className="mt-1 text-sm font-medium text-brand-accent">{level.tagline}</p>
+                  <p className="mt-2 max-w-2xl text-sm leading-7 text-text-secondary">
+                    {level.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -67,19 +137,46 @@ export default function EnterpriseAIPage() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-sm text-text-secondary">
-            هیچ قابلیت پیاده‌سازی‌نشده‌ای به‌عنوان ویژگی قطعی محصول معرفی نمی‌شود. وضعیت هر قابلیت در طراحی و قرارداد مشخص خواهد شد.
+          <p className="mt-6 max-w-3xl text-sm leading-7 text-text-secondary">
+            هیچ قابلیت پیاده‌سازی‌نشده‌ای به‌عنوان ویژگی قطعی محصول معرفی نمی‌شود. وضعیت هر قابلیت در
+            طراحی و قرارداد مشخص خواهد شد.
           </p>
         </div>
       </section>
 
       <section className="section-padding">
         <div className="container-custom">
-          <div className="grid gap-10 lg:grid-cols-2 lg:items-center">
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
+            <div>
+              <h2 className="section-title">مزایای سازمانی</h2>
+              <p className="section-subtitle">
+                ارزش راهکار با تغییر قابل مشاهده در دسترسی به اطلاعات، انجام کار و کیفیت تصمیم
+                سنجیده می‌شود.
+              </p>
+            </div>
+            <ul className="border-t border-border">
+              {benefits.map((benefit) => (
+                <li key={benefit} className="flex items-start gap-3 border-b border-border py-4">
+                  <span
+                    aria-hidden="true"
+                    className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-accent"
+                  />
+                  <span className="text-sm leading-7 text-text-primary">{benefit}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding border-y border-border bg-brand-light/50">
+        <div className="container-custom">
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
             <div>
               <h2 className="section-title">امنیت، کنترل و نظارت انسانی</h2>
               <p className="section-subtitle">
-                استفاده سازمانی از هوش مصنوعی باید با کنترل دسترسی، تعیین محل پردازش، نظارت انسانی در تصمیم‌های حساس و رعایت الزامات قانونی همراه باشد.
+                استفاده سازمانی از هوش مصنوعی باید با کنترل دسترسی، تعیین محل پردازش، نظارت انسانی
+                در تصمیم‌های حساس و رعایت الزامات قانونی همراه باشد.
               </p>
               <div className="mt-6 space-y-3 text-sm text-text-secondary">
                 <p>• تعریف سطح دسترسی کاربران و نقش‌ها</p>
@@ -89,23 +186,81 @@ export default function EnterpriseAIPage() {
                 <p>• پیش‌بینی نظارت انسانی در تصمیم‌های حساس</p>
               </div>
             </div>
-            <div className="card p-8">
-              <h3 className="text-lg font-semibold text-text-primary">سه سطح هوشمندی سازمانی آتیوار</h3>
-              <div className="mt-6 space-y-4 text-sm">
-                <div className="rounded-xl border border-border p-4">
-                  <p className="font-medium text-text-primary">سطح اول: ATIVAR Data Intelligence</p>
-                  <p className="mt-1 text-text-secondary">داده‌های سازمان به بینش مدیریتی تبدیل می‌شوند</p>
-                </div>
-                <div className="rounded-xl border border-border p-4">
-                  <p className="font-medium text-text-primary">سطح دوم: ATIVAR Knowledge Intelligence</p>
-                  <p className="mt-1 text-text-secondary">دانش سازمان به منبعی جست‌وجوپذیر و قابل استفاده تبدیل می‌شود</p>
-                </div>
-                <div className="rounded-xl border border-brand-accent/40 bg-brand-accentLight p-4">
-                  <p className="font-semibold text-text-primary">سطح سوم: ATIVAR Enterprise LLM</p>
-                  <p className="mt-1 text-text-primary">محیط هوش مصنوعی اختصاصی با کنترل و قابلیت توسعه</p>
-                </div>
+            <div className="card p-6 sm:p-8">
+              <h3 className="text-lg font-semibold text-text-primary">مسیر اجرا</h3>
+              <p className="mt-3 text-sm leading-7 text-text-secondary">
+                سازمان می‌تواند از هر یک از سه سطح آغاز کند. انتخاب مسیر مناسب به نیاز واقعی، وضعیت
+                داده، آمادگی زیرساخت، الزامات امنیتی و اهداف اقتصادی بستگی دارد.
+              </p>
+              <div className="mt-6 rounded-xl border border-border p-4">
+                <p className="text-sm font-medium text-text-primary">گام اول: ارزیابی اولیه</p>
+                <p className="mt-1 text-sm leading-7 text-text-secondary">
+                  بررسی نیاز، داده، زیرساخت و محدودیت‌ها برای تعیین نقطه شروع مناسب.
+                </p>
               </div>
+              <div className="mt-3 rounded-xl border border-border p-4">
+                <p className="text-sm font-medium text-text-primary">گام دوم: اجرای محدود و سنجش</p>
+                <p className="mt-1 text-sm leading-7 text-text-secondary">
+                  اجرای یک مورد کاربردی منتخب، سنجش نتیجه و تصمیم درباره گسترش.
+                </p>
+              </div>
+              <Link href="/contact" className="btn btn-primary mt-6 w-full">
+                {CTA_LABELS.aiAssessment}
+              </Link>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-padding">
+        <div className="container-custom">
+          <div className="max-w-2xl">
+            <p className="text-xs font-semibold tracking-wide text-brand-accent">جایگاه محصولات و خدمات</p>
+            <h2 className="section-title mt-3">یک تعریف واحد برای نام‌های مشابه</h2>
+            <p className="section-subtitle">
+              برای جلوگیری از هم‌پوشانی نام‌ها و سردرگمی مشتری، این تعریف‌ها در منوها، صفحات معرفی،
+              پیشنهادهای تجاری و اسناد فروش یکسان به کار می‌روند.
+            </p>
+          </div>
+
+          <div className="mt-8 overflow-x-auto rounded-2xl border border-border bg-white">
+            <table className="w-full min-w-[42rem] border-collapse text-right text-sm">
+              <thead>
+                <tr className="border-b border-border bg-brand-light/60">
+                  <th scope="col" className="px-5 py-4 font-semibold text-text-primary">نام</th>
+                  <th scope="col" className="px-5 py-4 font-semibold text-text-primary">تعریف پیشنهادی</th>
+                  <th scope="col" className="px-5 py-4 font-semibold text-text-primary">نقش در سبد خدمات</th>
+                </tr>
+              </thead>
+              <tbody>
+                {serviceLines.map((line) => (
+                  <tr key={line.name} className="border-b border-border last:border-b-0">
+                    <td className="px-5 py-4 font-medium text-text-primary">{line.name}</td>
+                    <td className="px-5 py-4 text-text-secondary">{line.definition}</td>
+                    <td className="px-5 py-4 text-text-secondary">{line.role}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <div className="mt-10 grid gap-6 rounded-2xl border border-border bg-brand-light/50 p-6 sm:p-8 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center">
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-brand-accent">
+                ATIVAR AI Business Platform
+              </p>
+              <h3 className="mt-2 text-xl font-bold text-text-primary">
+                توسعه خدمات هوشمند درآمدزا برای دیگران
+              </h3>
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-text-secondary">
+                آتیوار می‌تواند بر پایه قابلیت‌های Data Intelligence، Knowledge Intelligence و
+                Enterprise LLM، مسیر توسعه و ارائه خدمات هوشمند به شرکت‌های تابعه و مشتریان را طراحی
+                کند. دامنه این مسیر بر اساس مدل کسب‌وکار، زیرساخت و الزامات هر سازمان تعیین می‌شود.
+              </p>
+            </div>
+            <Link href="/contact" className="btn btn-outline shrink-0">
+              {CTA_LABELS.aiEconomics}
+            </Link>
           </div>
         </div>
       </section>
@@ -223,10 +378,10 @@ export default function EnterpriseAIPage() {
             </div>
             <div className="flex flex-wrap items-center gap-3">
               <Link href="/contact" className="btn btn-primary">
-                درخواست ارزیابی هوش مصنوعی
+                {CTA_LABELS.aiAssessment}
               </Link>
               <Link href="/products/ai-workspace" className="btn btn-outline">
-                ATIVAR AI Workspace
+                {CTA_LABELS.workspace}
               </Link>
             </div>
           </div>
@@ -235,4 +390,3 @@ export default function EnterpriseAIPage() {
     </>
   );
 }
-

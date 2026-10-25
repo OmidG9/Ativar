@@ -5,6 +5,12 @@ type PageMetadataInput = {
   title: string;
   description: string;
   path: `/${string}` | "/";
+  /**
+   * When true, the title is used verbatim instead of going through the
+   * layout's "%s | آتیوار" template. Used by the home page, whose title
+   * already starts with the brand name.
+   */
+  absoluteTitle?: boolean;
 };
 
 /**
@@ -12,9 +18,14 @@ type PageMetadataInput = {
  * The canonical must never be defined in the root layout, otherwise every
  * route inherits the home page URL.
  */
-export function createMetadata({ title, description, path }: PageMetadataInput): Metadata {
+export function createMetadata({
+  title,
+  description,
+  path,
+  absoluteTitle = false,
+}: PageMetadataInput): Metadata {
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: {
       canonical: path,

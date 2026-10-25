@@ -1,7 +1,13 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { articles, getArticle, getRelatedArticles } from "@/content/articles";
+import {
+  articles,
+  getArticle,
+  getArticleCategory,
+  getRelatedArticles,
+} from "@/content/articles";
+import { CTA_LABELS } from "@/lib/cta";
 import { formatPersianDate } from "@/lib/date";
 import { createMetadata } from "@/lib/metadata";
 import { siteConfig } from "@/lib/site";
@@ -16,7 +22,9 @@ export function generateStaticParams() {
   return articles.map((article) => ({ slug: article.slug }));
 }
 
-export async function generateMetadata({ params }: ArticlePageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ArticlePageProps): Promise<Metadata> {
   const { slug } = await params;
   const article = getArticle(slug);
   if (!article) return {};
@@ -45,6 +53,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
   if (!article) notFound();
 
   const related = getRelatedArticles(article.slug);
+  const categoryInfo = getArticleCategory(article.category);
   const url = `${siteConfig.url}/insights/${article.slug}`;
 
   const articleJsonLd = {
@@ -56,12 +65,19 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
     dateModified: article.publishedAt,
     inLanguage: "fa-IR",
     mainEntityOfPage: { "@type": "WebPage", "@id": url },
-    author: { "@type": "Organization", name: siteConfig.name, url: siteConfig.url },
+    author: {
+      "@type": "Organization",
+      name: siteConfig.name,
+      url: siteConfig.url,
+    },
     publisher: {
       "@type": "Organization",
       name: siteConfig.name,
       url: siteConfig.url,
-      logo: { "@type": "ImageObject", url: `${siteConfig.url}/icon.svg` },
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.url}/brand/ativar-logo.png`,
+      },
     },
   };
 
@@ -80,7 +96,7 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
                 <li aria-hidden="true">/</li>
                 <li>
                   <Link href="/insights" className="hover:text-text-primary">
-                    دانش و تحلیل
+                    بینش‌ها و تحلیل
                   </Link>
                 </li>
                 <li aria-hidden="true">/</li>
@@ -144,18 +160,35 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
               <aside aria-labelledby="takeaways-heading" className="lg:pt-2">
                 <div className="rounded-2xl border border-border bg-brand-light/70 p-6">
-                  <h2 id="takeaways-heading" className="text-sm font-semibold text-text-primary">
+                  <h2
+                    id="takeaways-heading"
+                    className="text-sm font-semibold text-text-primary"
+                  >
                     خلاصه کاربردی
                   </h2>
                   <ul className="mt-4 space-y-3">
                     {article.takeaways.map((takeaway) => (
-                      <li key={takeaway} className="text-sm leading-7 text-text-secondary">
+                      <li
+                        key={takeaway}
+                        className="text-sm leading-7 text-text-secondary"
+                      >
                         {takeaway}
                       </li>
                     ))}
                   </ul>
+                  {categoryInfo && (
+                    <div className="mt-6 border-t border-border pt-5">
+                      <p className="text-xs text-text-secondary">خدمات مرتبط</p>
+                      <Link
+                        href={categoryInfo.serviceHref}
+                        className="mt-2 inline-flex text-sm font-semibold text-brand-primary underline-offset-4 hover:underline"
+                      >
+                        {categoryInfo.serviceLabel} ←
+                      </Link>
+                    </div>
+                  )}
                   <Link href="/contact" className="btn btn-primary mt-6 w-full">
-                    درخواست جلسه مشاوره
+                    {CTA_LABELS.consult}
                   </Link>
                 </div>
               </aside>
@@ -168,21 +201,34 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
         <section className="section-padding border-t border-border">
           <div className="container-custom">
             <div className="flex items-center justify-between gap-4">
-              <h2 className="text-xl font-bold text-text-primary">مقالات مرتبط</h2>
-              <Link href="/insights" className="text-sm font-semibold text-brand-primary">
-                همه مقالات
+              <h2 className="text-xl font-bold text-text-primary">
+                مقالات مرتبط
+              </h2>
+              <Link
+                href="/insights"
+                className="text-sm font-semibold text-brand-primary"
+              >
+                همه بینش‌ها
               </Link>
             </div>
             <div className="mt-6 grid gap-6 md:grid-cols-2">
               {related.map((item) => (
-                <article key={item.slug} className="border-t border-border pt-5">
+                <article
+                  key={item.slug}
+                  className="border-t border-border pt-5"
+                >
                   <p className="text-xs text-text-secondary">{item.category}</p>
                   <h3 className="mt-2 text-base font-semibold leading-7 text-text-primary">
-                    <Link href={`/insights/${item.slug}`} className="hover:text-brand-primary">
+                    <Link
+                      href={`/insights/${item.slug}`}
+                      className="hover:text-brand-primary"
+                    >
                       {item.title}
                     </Link>
                   </h3>
-                  <p className="mt-2 text-sm leading-7 text-text-secondary">{item.description}</p>
+                  <p className="mt-2 text-sm leading-7 text-text-secondary">
+                    {item.description}
+                  </p>
                 </article>
               ))}
             </div>
@@ -192,7 +238,9 @@ export default async function ArticlePage({ params }: ArticlePageProps) {
 
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c") }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(articleJsonLd).replace(/</g, "\\u003c"),
+        }}
       />
     </>
   );
