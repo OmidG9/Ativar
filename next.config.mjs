@@ -2,6 +2,8 @@
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
+  // Produces .next/standalone so the Docker image only ships the files it needs.
+  output: "standalone",
   // Allows an isolated build (for example while a dev server owns .next).
   distDir: process.env.NEXT_DIST_DIR || ".next",
   images: {

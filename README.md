@@ -15,7 +15,7 @@
 - صفحه مطالعه موردی با الگوی استاندارد انتشار و تفکیک اطلاعات تأییدشده از اطلاعات در انتظار انتشار
 - متن دکمه‌های یکپارچه از طریق `src/lib/cta.ts` و تعریف یکسان محصولات و خدمات در `src/content/service-lines.ts`
 - فرم تماس با موضوعات درخواست مطابق بسته محتوا، اعتبارسنجی دوطرفه و پیام‌های شفاف موفقیت و خطا
-- CI با GitHub Actions: lint، typecheck، تست و build
+- CI با GitHub Actions روی رانر self-hosted (برچسب `Ativar`): lint، typecheck، تست، build، ساخت ایمیج داکر و استقرار خودکار
 - هدرهای امنیتی، دسترس‌پذیری پایه (Skip Link، Focus State، برچسب فرم‌ها) و احترام به `prefers-reduced-motion`
 
 ## راه‌اندازی
@@ -25,7 +25,7 @@ npm install
 npm run dev
 ```
 
-سایت روی `http://localhost:3000` در دسترس است.
+سایت روی `http://localhost:4646` در دسترس است.
 
 ### اسکریپت‌ها
 
@@ -38,6 +38,21 @@ npm run dev
 | `npm run typecheck`  | بررسی TypeScript                      |
 | `npm test`           | اجرای تست‌های واحد و یکپارچه (Vitest) |
 | `npm run test:watch` | اجرای تست‌ها در حالت watch            |
+
+## اجرا با داکر
+
+```bash
+cp .env.example .env.production   # مقادیر واقعی را وارد کنید
+docker compose --env-file .env.production up -d --build
+curl -fsS http://127.0.0.1:4646/api/health
+```
+
+- ایمیج چندمرحله‌ای است و از `output: "standalone"` نکست استفاده می‌کند؛ فقط فایل‌های لازم در ایمیج نهایی قرار می‌گیرند.
+- کانتینر با کاربر غیر root اجرا می‌شود و healthcheck روی `/api/health` دارد.
+- پورت `4646` روی هاست به پورت `3000` کانتینر متصل می‌شود.
+- متغیرهای `NEXT_PUBLIC_*` در زمان build داخل ایمیج ثابت می‌شوند و بقیه متغیرها در زمان اجرا تزریق می‌شوند.
+
+مستند کامل نصب رانر self-hosted و استقرار خودکار: [`deploy/README.md`](deploy/README.md).
 
 ## پیکربندی فرم تماس
 
@@ -130,7 +145,10 @@ src/
 ├── content/              # مقالات، مطالعات موردی و تعریف یکسان محصولات و خدمات
 └── lib/                  # تنظیمات سایت، متادیتا، متن CTAها، شماره‌گذاری فارسی، ارسال فرم
 tests/                    # تست‌های واحد و یکپارچه
-.github/workflows/ci.yml  # lint + typecheck + test + build
+deploy/                   # نصب رانر و اسکریپت استقرار
+Dockerfile                # ایمیج چندمرحله‌ای تولید
+docker-compose.yml        # اجرای کانتینر روی پورت 4646
+.github/workflows/ci.yml  # lint + typecheck + test + build + docker + deploy
 ```
 
 > برای ساخت ایزوله در زمانی که یک dev server روی `.next` کار می‌کند، می‌توانید `NEXT_DIST_DIR=.next-verify npm run build` را اجرا کنید.

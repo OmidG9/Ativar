@@ -1,0 +1,37 @@
+# Git and CI metadata
+.git
+.gitignore
+.github
+.gitattributes
+
+# Dependencies and build output (rebuilt inside the image)
+node_modules
+.next
+.next-*
+out
+build
+dist
+coverage
+*.tsbuildinfo
+
+# Local env files and secrets (public build args are passed explicitly)
+.env
+.env.*
+!.env.example
+
+# Development, docs and deployment tooling
+.vscode
+.idea
+tests
+deploy
+scripts
+*.md
+Dockerfile
+docker-compose.yml
+docker-compose.*.yml
+.dockerignore
+
+# OS noise
+.DS_Store
+Thumbs.db
+*.log
