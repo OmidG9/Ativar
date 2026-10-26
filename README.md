@@ -29,15 +29,15 @@ npm run dev
 
 ### اسکریپت‌ها
 
-| دستور | توضیح |
-|---|---|
-| `npm run dev` | اجرای محیط توسعه |
-| `npm run build` | ساخت نسخه تولید |
-| `npm run start` | اجرای نسخه ساخته‌شده |
-| `npm run lint` | بررسی ESLint |
-| `npm run typecheck` | بررسی TypeScript |
-| `npm test` | اجرای تست‌های واحد و یکپارچه (Vitest) |
-| `npm run test:watch` | اجرای تست‌ها در حالت watch |
+| دستور                | توضیح                                 |
+| -------------------- | ------------------------------------- |
+| `npm run dev`        | اجرای محیط توسعه                      |
+| `npm run build`      | ساخت نسخه تولید                       |
+| `npm run start`      | اجرای نسخه ساخته‌شده                  |
+| `npm run lint`       | بررسی ESLint                          |
+| `npm run typecheck`  | بررسی TypeScript                      |
+| `npm test`           | اجرای تست‌های واحد و یکپارچه (Vitest) |
+| `npm run test:watch` | اجرای تست‌ها در حالت watch            |
 
 ## پیکربندی فرم تماس
 
@@ -76,6 +76,7 @@ CONTACT_WEBHOOK_URL=https://example.com/webhook
   - در production پاسخ `503` برگردانده می‌شود. هیچ موفقیت ساختگی نمایش داده نمی‌شود.
 
 > برای آزمون محلی می‌توانید `TELEGRAM_API_BASE` و `RESEND_API_BASE` را به یک سرور mock اشاره دهید. تست‌های `tests/contact-route.integration.test.ts` همین مسیر را با HTTP واقعی پوشش می‌دهند.
+> \\
 
 ### آزمایش ارسال تلگرام
 
