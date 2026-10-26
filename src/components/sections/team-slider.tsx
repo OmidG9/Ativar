@@ -24,7 +24,11 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
       strokeLinejoin="round"
       className="h-5 w-5"
     >
-      {direction === "next" ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
+      {direction === "next" ? (
+        <path d="M15 18l-6-6 6-6" />
+      ) : (
+        <path d="M9 18l6-6-6-6" />
+      )}
     </svg>
   );
 }
@@ -33,7 +37,12 @@ function PlayPauseIcon({ playing }: { playing: boolean }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
       {playing ? (
-        <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+        <g
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+        >
           <path d="M9 5v14" />
           <path d="M15 5v14" />
         </g>
@@ -53,7 +62,13 @@ function initials(name: string) {
     .join("");
 }
 
-function MemberPhoto({ member, priority }: { member: TeamMember; priority: boolean }) {
+function MemberPhoto({
+  member,
+  priority,
+}: {
+  member: TeamMember;
+  priority: boolean;
+}) {
   const [failed, setFailed] = useState(false);
   const showImage = Boolean(member.image) && !failed;
 
@@ -95,10 +110,18 @@ function MemberPhoto({ member, priority }: { member: TeamMember; priority: boole
 
 function MemberSocials({ member }: { member: TeamMember }) {
   const links = [
-    member.socials.linkedin ? { href: member.socials.linkedin, label: "LinkedIn" } : null,
-    member.socials.github ? { href: member.socials.github, label: "GitHub" } : null,
-    member.socials.website ? { href: member.socials.website, label: "وب‌سایت" } : null,
-    member.socials.email ? { href: `mailto:${member.socials.email}`, label: "ایمیل" } : null,
+    member.socials.linkedin
+      ? { href: member.socials.linkedin, label: "LinkedIn" }
+      : null,
+    member.socials.github
+      ? { href: member.socials.github, label: "GitHub" }
+      : null,
+    member.socials.website
+      ? { href: member.socials.website, label: "وب‌سایت" }
+      : null,
+    member.socials.email
+      ? { href: `mailto:${member.socials.email}`, label: "ایمیل" }
+      : null,
   ].filter((link): link is { href: string; label: string } => link !== null);
 
   if (links.length === 0) return null;
@@ -111,7 +134,9 @@ function MemberSocials({ member }: { member: TeamMember }) {
           href={link.href}
           className="text-xs font-semibold text-brand-primary underline-offset-4 hover:underline"
           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-          rel={link.href.startsWith("mailto:") ? undefined : "noreferrer noopener"}
+          rel={
+            link.href.startsWith("mailto:") ? undefined : "noreferrer noopener"
+          }
         >
           {link.label}
         </a>
@@ -142,19 +167,29 @@ export function TeamSlider({ members }: TeamSliderProps) {
     const onVisibilityChange = () => setTabHidden(document.hidden);
     onVisibilityChange();
     document.addEventListener("visibilitychange", onVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+    return () =>
+      document.removeEventListener("visibilitychange", onVisibilityChange);
   }, []);
 
   // Infinite rotation: after the last member it wraps back to the first.
   useEffect(() => {
-    if (!isPlaying || hovered || focused || tabHidden || members.length <= 1) return;
+    if (!isPlaying || hovered || focused || tabHidden || members.length <= 1)
+      return;
 
     const timer = window.setTimeout(() => {
       setActive((current) => (current + 1) % members.length);
     }, PLAY_INTERVAL_MS);
 
     return () => window.clearTimeout(timer);
-  }, [active, isPlaying, hovered, focused, tabHidden, resumeKey, members.length]);
+  }, [
+    active,
+    isPlaying,
+    hovered,
+    focused,
+    tabHidden,
+    resumeKey,
+    members.length,
+  ]);
 
   if (members.length === 0) return null;
 
@@ -199,12 +234,18 @@ export function TeamSlider({ members }: TeamSliderProps) {
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(18, 175, 193, 0.16), transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, rgba(18, 175, 193, 0.16), transparent 70%)",
+        }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
-        style={{ background: "radial-gradient(circle, rgba(23, 107, 155, 0.12), transparent 70%)" }}
+        style={{
+          background:
+            "radial-gradient(circle, rgba(23, 107, 155, 0.12), transparent 70%)",
+        }}
       />
 
       <div className="container-custom relative z-10">
@@ -219,7 +260,8 @@ export function TeamSlider({ members }: TeamSliderProps) {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-text-secondary sm:text-base">
-            ترکیب تجربه، تخصص و فناوری در کنار یکدیگر برای ساخت راهکارهای پایدار سازمانی.
+            ترکیب تجربه، تخصص و فناوری در کنار یکدیگر برای ساخت راهکارهای پایدار
+            سازمانی.
           </p>
         </div>
 
@@ -232,7 +274,9 @@ export function TeamSlider({ members }: TeamSliderProps) {
             setFocused(true);
           }}
           onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+            if (
+              !event.currentTarget.contains(event.relatedTarget as Node | null)
+            ) {
               setFocused(false);
             }
           }}
@@ -257,7 +301,10 @@ export function TeamSlider({ members }: TeamSliderProps) {
                 </h3>
                 <div className="mt-3 space-y-1">
                   {member.roles.map((role) => (
-                    <p key={role} className="text-sm font-medium text-brand-primary sm:text-base">
+                    <p
+                      key={role}
+                      className="text-sm font-medium text-brand-primary sm:text-base"
+                    >
                       {role}
                     </p>
                   ))}
@@ -300,7 +347,11 @@ export function TeamSlider({ members }: TeamSliderProps) {
               </div>
 
               <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2.5" role="group" aria-label="انتخاب عضو تیم">
+                <div
+                  className="flex items-center gap-2.5"
+                  role="group"
+                  aria-label="انتخاب عضو تیم"
+                >
                   {members.map((item, index) => (
                     <button
                       key={item.id}
@@ -327,7 +378,9 @@ export function TeamSlider({ members }: TeamSliderProps) {
                 <button
                   ref={playButtonRef}
                   type="button"
-                  aria-label={isPlaying ? "توقف چرخش خودکار" : "شروع چرخش خودکار"}
+                  aria-label={
+                    isPlaying ? "توقف چرخش خودکار" : "شروع چرخش خودکار"
+                  }
                   aria-pressed={isPlaying}
                   onClick={togglePlaying}
                   className={cn(controlClass, "h-9 w-9")}
