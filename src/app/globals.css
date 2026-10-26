@@ -98,6 +98,21 @@ body {
   }
 }
 
+@keyframes team-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-team-fade {
+  animation: team-fade-up 0.5s ease both;
+}
+
 .animate-marquee {
   animation: marquee 110s linear infinite;
 }
