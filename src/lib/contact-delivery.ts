@@ -28,6 +28,20 @@ function trimTrailingSlash(value: string): string {
   return value.replace(/\/+$/, "");
 }
 
+function describeError(error: unknown): string {
+  if (!(error instanceof Error)) return "unknown error";
+
+  const cause = error.cause;
+  if (cause instanceof Error) {
+    const code = (cause as NodeJS.ErrnoException).code;
+    return `${error.message} (${code ?? cause.message})`;
+  }
+  if (cause && typeof cause === "object" && "code" in cause) {
+    return `${error.message} (${String((cause as { code: unknown }).code)})`;
+  }
+  return error.message;
+}
+
 export function hasTelegramConfig(env: DeliveryEnv): boolean {
   return Boolean(env.TELEGRAM_BOT_TOKEN && env.TELEGRAM_CHAT_ID);
 }
@@ -85,7 +99,7 @@ async function sendTelegram(
     return {
       channel: "telegram",
       ok: false,
-      error: error instanceof Error ? error.message : "unknown error",
+      error: describeError(error),
     };
   }
 }
@@ -112,7 +126,7 @@ async function sendEmail(
     return {
       channel: "email",
       ok: false,
-      error: error instanceof Error ? error.message : "unknown error",
+      error: describeError(error),
     };
   }
 }
@@ -131,7 +145,7 @@ async function sendWebhook(
     return {
       channel: "webhook",
       ok: false,
-      error: error instanceof Error ? error.message : "unknown error",
+      error: describeError(error),
     };
   }
 }
