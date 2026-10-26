@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { TeamMember } from "@/content/team";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +25,21 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
       className="h-5 w-5"
     >
       {direction === "next" ? <path d="M15 18l-6-6 6-6" /> : <path d="M9 18l6-6-6-6" />}
+    </svg>
+  );
+}
+
+function PlayPauseIcon({ playing }: { playing: boolean }) {
+  return (
+    <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
+      {playing ? (
+        <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <path d="M9 5v14" />
+          <path d="M15 5v14" />
+        </g>
+      ) : (
+        <path d="M8 5v14l11-7z" fill="currentColor" />
+      )}
     </svg>
   );
 }
@@ -105,8 +120,41 @@ function MemberSocials({ member }: { member: TeamMember }) {
   );
 }
 
+const PLAY_INTERVAL_MS = 7000;
+
 export function TeamSlider({ members }: TeamSliderProps) {
   const [active, setActive] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [tabHidden, setTabHidden] = useState(false);
+  const [resumeKey, setResumeKey] = useState(0);
+  const playButtonRef = useRef<HTMLButtonElement>(null);
+
+  // Disable the automatic rotation for visitors who prefer reduced motion.
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setIsPlaying(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    const onVisibilityChange = () => setTabHidden(document.hidden);
+    onVisibilityChange();
+    document.addEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
+  }, []);
+
+  // Infinite rotation: after the last member it wraps back to the first.
+  useEffect(() => {
+    if (!isPlaying || hovered || focused || tabHidden || members.length <= 1) return;
+
+    const timer = window.setTimeout(() => {
+      setActive((current) => (current + 1) % members.length);
+    }, PLAY_INTERVAL_MS);
+
+    return () => window.clearTimeout(timer);
+  }, [active, isPlaying, hovered, focused, tabHidden, resumeKey, members.length]);
 
   if (members.length === 0) return null;
 
@@ -115,6 +163,21 @@ export function TeamSlider({ members }: TeamSliderProps) {
 
   const goTo = (index: number) => {
     setActive((index + members.length) % members.length);
+    setResumeKey((key) => key + 1);
+  };
+
+  const togglePlaying = () => {
+    if (isPlaying) {
+      setIsPlaying(false);
+      return;
+    }
+
+    // The visitor explicitly asked for rotation, so ignore the hover/focus that
+    // is hovering over the card (e.g. the cursor resting on this button).
+    setHovered(false);
+    setFocused(false);
+    setIsPlaying(true);
+    setResumeKey((key) => key + 1);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -160,7 +223,20 @@ export function TeamSlider({ members }: TeamSliderProps) {
           </p>
         </div>
 
-        <div className="rounded-2xl border border-border bg-white/80 p-6 shadow-[0_24px_70px_-30px_rgba(23,107,155,0.35)] backdrop-blur-sm sm:p-10 lg:p-14">
+        <div
+          className="rounded-2xl border border-border bg-white/80 p-6 shadow-[0_24px_70px_-30px_rgba(23,107,155,0.35)] backdrop-blur-sm sm:p-10 lg:p-14"
+          onMouseEnter={() => setHovered(true)}
+          onMouseLeave={() => setHovered(false)}
+          onFocusCapture={(event) => {
+            if ((event.target as Node) === playButtonRef.current) return;
+            setFocused(true);
+          }}
+          onBlurCapture={(event) => {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+              setFocused(false);
+            }
+          }}
+        >
           <div
             role="region"
             aria-roledescription="carousel"
@@ -223,32 +299,47 @@ export function TeamSlider({ members }: TeamSliderProps) {
                 </button>
               </div>
 
-              <div className="flex items-center gap-2.5" role="group" aria-label="انتخاب عضو تیم">
-                {members.map((item, index) => (
-                  <button
-                    key={item.id}
-                    type="button"
-                    aria-label={`نمایش ${item.name}`}
-                    aria-current={safeActive === index ? "true" : undefined}
-                    onClick={() => goTo(index)}
-                    className="relative flex h-2.5 items-center"
-                  >
-                    <span
-                      className={cn(
-                        "block rounded-full transition-all duration-300",
-                        safeActive === index
-                          ? "h-2.5 w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
-                          : "h-2.5 w-2.5 bg-text-secondary/30 hover:bg-brand-accent/50",
-                      )}
-                    />
-                  </button>
-                ))}
+              <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2.5" role="group" aria-label="انتخاب عضو تیم">
+                  {members.map((item, index) => (
+                    <button
+                      key={item.id}
+                      type="button"
+                      aria-label={`نمایش ${item.name}`}
+                      aria-current={safeActive === index ? "true" : undefined}
+                      onClick={() => goTo(index)}
+                      className="relative flex h-2.5 items-center"
+                    >
+                      <span
+                        className={cn(
+                          "block rounded-full transition-all duration-300",
+                          safeActive === index
+                            ? "h-2.5 w-8 bg-gradient-to-r from-brand-primary to-brand-accent"
+                            : "h-2.5 w-2.5 bg-text-secondary/30 hover:bg-brand-accent/50",
+                        )}
+                      />
+                    </button>
+                  ))}
+                </div>
+
+                <span aria-hidden="true" className="h-4 w-px bg-border" />
+
+                <button
+                  ref={playButtonRef}
+                  type="button"
+                  aria-label={isPlaying ? "توقف چرخش خودکار" : "شروع چرخش خودکار"}
+                  aria-pressed={isPlaying}
+                  onClick={togglePlaying}
+                  className={cn(controlClass, "h-9 w-9")}
+                >
+                  <PlayPauseIcon playing={isPlaying} />
+                </button>
               </div>
             </div>
           </div>
         </div>
 
-        <p className="sr-only" aria-live="polite">
+        <p className="sr-only" aria-live={isPlaying ? "off" : "polite"}>
           {member.name}
         </p>
       </div>
