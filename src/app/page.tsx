@@ -132,67 +132,83 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden">
+      <section className="relative isolate flex min-h-[calc(100vh-4rem)] items-center overflow-hidden supports-[height:100svh]:min-h-[calc(100svh-4rem)]">
+        {/* Full-bleed background image (portrait crop on phones/tablets, landscape on desktop) */}
         <div className="absolute inset-0 -z-10">
-          <Image
-            src="/img/ativar_image_5000x5000.png"
-            alt="محیط واقعی سازمانی با تیم حرفه‌ای در حال گفتگو و همکاری"
-            fill
-            className="object-contain object-right"
-            sizes="100vw"
-            priority
+          <picture>
+            <source
+              media="(min-width: 1024px)"
+              srcSet="/heropage-vids.mp4"
+            />
+            <img
+              src="/img/hero-enterprise-mobile.webp"
+              alt="محیط واقعی سازمانی با تیم حرفه‌ای در حال گفتگو و همکاری"
+              className="absolute inset-0 h-full w-full object-cover object-center"
+              fetchPriority="high"
+              decoding="async"
+            />
+          </picture>
+          {/* Subtle scrim keeps the photo visible while text stays readable */}
+          <div
+            className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.16)_45%,rgba(255,255,255,0)_72%)] md:bg-[linear-gradient(to_right,rgba(255,255,255,0.34)_0%,rgba(255,255,255,0.1)_48%,rgba(255,255,255,0)_74%)]"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white/85 via-white/35 to-transparent"
+            aria-hidden="true"
           />
         </div>
 
-        <div className="container-custom relative pt-10 pb-12 lg:pt-20 lg:pb-16">
-          <div className="relative max-w-xl lg:max-w-2xl">
-            <div className="absolute -inset-x-6 -inset-y-8 -z-10 hidden rounded-3xl bg-white/40 backdrop-blur-md md:block lg:-inset-x-10 lg:-inset-y-10" />
-            <div className="relative">
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#DCEAF2] bg-white/90 px-4 py-1.5 text-xs text-[#24384B] shadow-[0_1px_2px_rgba(36,56,75,0.02)] backdrop-blur">
-                <span
-                  className="h-1.5 w-1.5 rounded-full bg-[#21B5C8]"
-                  aria-hidden="true"
-                />
-                <span>هوش مصنوعی سازمانی | معماری راهکارهای هوشمند</span>
-              </div>
+        <div className="relative mx-auto w-full max-w-[1500px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
+          <div className="relative ms-auto w-full max-w-xl lg:max-w-2xl">
+            <div
+              className="absolute -inset-x-4 -inset-y-6 -z-10 rounded-[2rem] border border-white/70 bg-white/60 shadow-[0_30px_90px_-50px_rgba(21,54,83,0.55)] backdrop-blur-md sm:-inset-x-5 sm:-inset-y-8 md:bg-white/70 lg:-inset-x-6 lg:-inset-y-10"
+              aria-hidden="true"
+            />
+            <div className="inline-flex items-center gap-2 rounded-full border border-[#DCEAF2] bg-white/90 px-4 py-1.5 text-xs text-[#24384B] shadow-[0_1px_2px_rgba(36,56,75,0.02)] backdrop-blur">
+              <span
+                className="h-1.5 w-1.5 rounded-full bg-[#21B5C8]"
+                aria-hidden="true"
+              />
+              <span>هوش مصنوعی سازمانی | معماری راهکارهای هوشمند</span>
+            </div>
 
-              <h1 className="mt-6 text-balance text-[2.25rem] font-bold leading-[1.32] tracking-tight text-[#153653] sm:text-5xl sm:leading-[1.28] lg:text-[3.5rem] lg:leading-[1.26]">
-                هوش مصنوعی برای حل مسائل واقعی سازمان شما
-              </h1>
+            <h1 className="mt-6 text-balance text-[2.25rem] font-bold leading-[1.32] tracking-tight text-[#153653] sm:text-5xl sm:leading-[1.28] lg:text-[3.5rem] lg:leading-[1.26]">
+              هوش مصنوعی برای حل مسائل واقعی سازمان شما
+            </h1>
 
-              <p className="mt-6 max-w-2xl text-base leading-8 text-[#24384B] sm:text-lg sm:leading-9">
-                آتیوار به سازمان‌ها کمک می‌کند دانش، داده‌ها، فرایندها و
-                سامانه‌های خود را به راهکارهای هوشمند، یکپارچه و قابل‌کنترل
-                تبدیل کنند؛ از تدوین نقشه راه تا طراحی، پیاده‌سازی و بهبود
-                مستمر.
-              </p>
+            <p className="mt-6 max-w-2xl text-base leading-8 text-[#24384B] sm:text-lg sm:leading-9">
+              آتیوار به سازمان‌ها کمک می‌کند دانش، داده‌ها، فرایندها و سامانه‌های
+              خود را به راهکارهای هوشمند، یکپارچه و قابل‌کنترل تبدیل کنند؛ از
+              تدوین نقشه راه تا طراحی، پیاده‌سازی و بهبود مستمر.
+            </p>
 
-              <div className="mt-9 flex flex-wrap items-center gap-3">
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#079BC5] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#08799D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
-                >
-                  {CTA_LABELS.aiAssessment ||
-                    "ارزیابی آمادگی هوش مصنوعی سازمان"}
-                </Link>
-                <Link
-                  href="/about/team"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#DCEAF2] bg-white/95 px-6 py-3 text-sm font-semibold text-[#153653] transition-colors hover:border-[#21B5C8]/40 hover:bg-[#E8F7FC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
-                >
-                  معرفی آتیوار
-                </Link>
-              </div>
+            <div className="mt-9 flex flex-wrap items-center gap-3">
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#079BC5] px-6 py-3 text-sm font-semibold text-white shadow-[0_18px_35px_-22px_rgba(7,155,197,0.9)] transition-colors hover:bg-[#08799D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
+              >
+                {CTA_LABELS.aiAssessment || "ارزیابی آمادگی هوش مصنوعی سازمان"}
+              </Link>
+              <Link
+                href="/about/team"
+                className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#DCEAF2] bg-white/95 px-6 py-3 text-sm font-semibold text-[#153653] transition-colors hover:border-[#21B5C8]/40 hover:bg-[#E8F7FC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
+              >
+                معرفی آتیوار
+              </Link>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Three Core Value Cards */}
-        <div className="container-custom pb-14 lg:pb-16">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Three Core Value Cards */}
+      <section className="relative z-10 -mt-16 pb-10 sm:-mt-20 lg:-mt-24 lg:pb-14">
+        <div className="container-custom">
+          <div className="grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
             {heroValueCards.map((card) => (
               <div
                 key={card.number}
-                className="group relative overflow-hidden rounded-2xl border border-[#DCEAF2] bg-white p-6 shadow-[0_1px_2px_rgba(36,56,75,0.02)] transition-shadow hover:shadow-[0_25px_70px_-45px_rgba(21,54,83,0.55)]"
+                className="group relative overflow-hidden rounded-2xl border border-white/70 bg-white/95 p-5 shadow-[0_20px_60px_-45px_rgba(21,54,83,0.6)] backdrop-blur-md transition-shadow hover:bg-white hover:shadow-[0_25px_70px_-40px_rgba(21,54,83,0.55)] sm:p-6"
               >
                 <div
                   className="absolute -left-10 -top-10 h-24 w-24 rounded-full bg-[#E8F7FC]/70 blur-2xl"
@@ -203,7 +219,7 @@ export default function HomePage() {
                     <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#E8F7FC] text-sm font-semibold text-[#079BC5]">
                       {card.number}
                     </span>
-                    <span class className="text-[#21B5C8]" aria-hidden="true">
+                    <span className="text-[#21B5C8]" aria-hidden="true">
                       <svg
                         width="18"
                         height="18"
@@ -269,7 +285,7 @@ export default function HomePage() {
       {/* Services */}
       <section
         id="services"
-        className="relative scroll-mt-20 border-b border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28"
+        className="relative overflow-hidden scroll-mt-20 border-b border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28"
       >
         <Image
           src="/img/Light Blue Floral Mandala Line Art.webp"
