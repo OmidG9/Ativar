@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
 import { faNumber } from "@/lib/number";
@@ -73,11 +74,26 @@ const intelligenceLevels = [
 ];
 
 const process = [
-  { title: "شناخت", desc: "بررسی نیاز کسب‌وکار، وضعیت موجود، محدودیت‌ها و اهداف سازمان." },
-  { title: "طراحی", desc: "تدوین راهکار، معماری، دامنه پروژه، برآورد اولیه و شاخص‌های موفقیت." },
-  { title: "برنامه‌ریزی", desc: "تعیین مراحل اجرا، منابع، مسئولیت‌ها و الزامات فنی و امنیتی." },
-  { title: "اجرا", desc: "پیاده‌سازی، یکپارچه‌سازی، آزمون و آماده‌سازی برای بهره‌برداری." },
-  { title: "ارزیابی و توسعه", desc: "سنجش نتایج و تصمیم‌گیری درباره اصلاح یا گسترش راهکار." },
+  {
+    title: "شناخت",
+    desc: "بررسی نیاز کسب‌وکار، وضعیت موجود، محدودیت‌ها و اهداف سازمان.",
+  },
+  {
+    title: "طراحی",
+    desc: "تدوین راهکار، معماری، دامنه پروژه، برآورد اولیه و شاخص‌های موفقیت.",
+  },
+  {
+    title: "برنامه‌ریزی",
+    desc: "تعیین مراحل اجرا، منابع، مسئولیت‌ها و الزامات فنی و امنیتی.",
+  },
+  {
+    title: "اجرا",
+    desc: "پیاده‌سازی، یکپارچه‌سازی، آزمون و آماده‌سازی برای بهره‌برداری.",
+  },
+  {
+    title: "ارزیابی و توسعه",
+    desc: "سنجش نتایج و تصمیم‌گیری درباره اصلاح یا گسترش راهکار.",
+  },
 ];
 
 const trustItems = [
@@ -91,104 +107,137 @@ const trustItems = [
   "راهکارهای متناسب با زیرساخت و الزامات سازمان",
 ];
 
-const collaborationScope = [
-  { title: "مشاوره راهبردی و تحول دیجیتال", href: "/services/consulting" },
-  { title: "هوش مصنوعی سازمانی", href: "/solutions/enterprise-ai" },
-  { title: "راهکارهای فین‌تک", href: "/solutions/fintech" },
-  { title: "معماری و اجرای پروژه", href: "/services/implementation" },
+const heroValueCards = [
+  {
+    number: "۰۱",
+    title: "شناخت و طراحی راهبرد",
+    description:
+      "درک نیازهای واقعی سازمان، ارزیابی آمادگی داده و فناوری، و تدوین نقشه راه اجرایی هوش مصنوعی.",
+  },
+  {
+    number: "۰۲",
+    title: "معماری و پیاده‌سازی",
+    description:
+      "طراحی راهکارهای متناسب با نیاز سازمان و یکپارچه‌سازی هوش مصنوعی با دانش، داده‌ها و سامانه‌های موجود.",
+  },
+  {
+    number: "۰۳",
+    title: "بهره‌برداری و خلق ارزش",
+    description:
+      "تمرکز بر افزایش بهره‌وری، بهبود تصمیم‌گیری، کنترل ریسک و سنجش نتایج کسب‌وکار.",
+  },
 ];
 
 export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-border pt-8 pb-8">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(1200px_600px_at_80%_-10%,rgba(18,175,193,0.08),transparent)]" />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(900px_500px_at_10%_-20%,rgba(23,107,155,0.07),transparent)]" />
-        <div className="container-custom grid items-center gap-12 pt-[calc(4rem+20px)] pb-[calc(4rem+20px)] lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pt-[calc(6rem+20px)] lg:pb-[calc(6rem+20px)]">
-          <div>
-            <div className="inline-flex items-center gap-2 rounded-full border border-border/80 bg-white/80 px-4 py-1.5 text-xs text-text-secondary shadow-subtle backdrop-blur">
-              <span className="h-1.5 w-1.5 rounded-full bg-brand-accent" aria-hidden="true" />
-              مشاوره، معماری و اجرای راهکارهای هوش مصنوعی و فین‌تک
-            </div>
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10">
+          <Image
+            src="/img/ativar_image_5000x5000.png"
+            alt="محیط واقعی سازمانی با تیم حرفه‌ای در حال گفتگو و همکاری"
+            fill
+            className="object-contain object-right"
+            sizes="100vw"
+            priority
+          />
+        </div>
 
-            <h1 className="mt-6 text-balance text-[2.15rem] font-bold leading-[1.32] tracking-tight text-text-primary sm:text-5xl sm:leading-[1.28] lg:text-[3.6rem]">
-              هوش مصنوعی و فناوری مالی، در خدمت
-              <span className="text-brand-primary"> عملکرد بهتر کسب‌وکار</span>
-            </h1>
+        <div className="container-custom relative pt-10 pb-12 lg:pt-20 lg:pb-16">
+          <div className="relative max-w-xl lg:max-w-2xl">
+            <div className="absolute -inset-x-6 -inset-y-8 -z-10 hidden rounded-3xl bg-white/40 backdrop-blur-md md:block lg:-inset-x-10 lg:-inset-y-10" />
+            <div className="relative">
+              <div className="inline-flex items-center gap-2 rounded-full border border-[#DCEAF2] bg-white/90 px-4 py-1.5 text-xs text-[#24384B] shadow-[0_1px_2px_rgba(36,56,75,0.02)] backdrop-blur">
+                <span
+                  className="h-1.5 w-1.5 rounded-full bg-[#21B5C8]"
+                  aria-hidden="true"
+                />
+                <span>هوش مصنوعی سازمانی | معماری راهکارهای هوشمند</span>
+              </div>
 
-            <p className="mt-6 max-w-2xl text-base leading-8 text-text-secondary sm:text-lg sm:leading-9">
-              آتیوار به سازمان‌ها کمک می‌کند مسائل پیچیده کسب‌وکار را به راهکارهای دیجیتال قابل اجرا
-              تبدیل کنند؛ از مشاوره راهبردی و طراحی معماری تا استقرار هوش مصنوعی سازمانی، توسعه
-              راهکارهای فین‌تک و یکپارچه‌سازی سامانه‌ها.
-            </p>
+              <h1 className="mt-6 text-balance text-[2.25rem] font-bold leading-[1.32] tracking-tight text-[#153653] sm:text-5xl sm:leading-[1.28] lg:text-[3.5rem] lg:leading-[1.26]">
+                هوش مصنوعی برای حل مسائل واقعی سازمان شما
+              </h1>
 
-            <p className="mt-4 max-w-2xl text-base leading-8 text-text-secondary">
-              تمرکز ما بر ایجاد قابلیت‌هایی است که به سازمان کمک کنند تصمیم‌های آگاهانه‌تری بگیرند،
-              از داده و دانش خود بهتر استفاده کنند، فرایندهای کاری را بهبود دهند و فرصت‌های جدیدی
-              برای توسعه خدمات و درآمد شناسایی کنند.
-            </p>
+              <p className="mt-6 max-w-2xl text-base leading-8 text-[#24384B] sm:text-lg sm:leading-9">
+                آتیوار به سازمان‌ها کمک می‌کند دانش، داده‌ها، فرایندها و
+                سامانه‌های خود را به راهکارهای هوشمند، یکپارچه و قابل‌کنترل
+                تبدیل کنند؛ از تدوین نقشه راه تا طراحی، پیاده‌سازی و بهبود
+                مستمر.
+              </p>
 
-            <p className="mt-6 text-base font-semibold leading-8 text-text-primary">
-              از شناخت مسئله تا طراحی، اجرا و توسعه راهکار؛ آتیوار در کنار سازمان شماست.
-            </p>
-
-            <div className="mt-9 flex flex-wrap items-center gap-3">
-              <Link href="/contact" className="btn btn-primary">
-                {CTA_LABELS.consult}
-              </Link>
-              <Link href="#services" className="btn btn-outline">
-                {CTA_LABELS.viewSolutions}
-              </Link>
+              <div className="mt-9 flex flex-wrap items-center gap-3">
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl bg-[#079BC5] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#08799D] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
+                >
+                  {CTA_LABELS.aiAssessment ||
+                    "ارزیابی آمادگی هوش مصنوعی سازمان"}
+                </Link>
+                <Link
+                  href="/about/team"
+                  className="inline-flex items-center justify-center gap-2 rounded-xl border border-[#DCEAF2] bg-white/95 px-6 py-3 text-sm font-semibold text-[#153653] transition-colors hover:border-[#21B5C8]/40 hover:bg-[#E8F7FC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#21B5C8]/40 focus-visible:ring-offset-2"
+                >
+                  معرفی آتیوار
+                </Link>
+              </div>
             </div>
           </div>
+        </div>
 
-          <div className="relative">
-            <div className="absolute -left-6 -top-6 -z-10 hidden h-40 w-40 rounded-full bg-brand-accent/10 blur-3xl lg:block" />
-            <div className="absolute -bottom-10 -right-10 -z-10 hidden h-48 w-48 rounded-full bg-brand-primary/10 blur-3xl lg:block" />
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-white shadow-[0_60px_120px_-80px_rgba(23,107,155,0.45)]">
-              <div className="flex items-center justify-between border-b border-border/70 px-6 py-4 sm:px-8">
-                <div>
-                  <p className="text-sm font-semibold text-text-primary">دامنه همکاری آتیوار</p>
-                  <p className="mt-1 text-xs text-text-secondary">از شناخت مسئله تا اجرا و توسعه راهکار</p>
-                </div>
-                <span className="h-2 w-2 rounded-full bg-brand-accent shadow-[0_0_0_6px_rgba(18,175,193,0.08)]" aria-hidden="true" />
-              </div>
-              <div className="px-6 py-6 sm:px-8 sm:py-7">
-                <ul className="space-y-3">
-                  {collaborationScope.map((item, index) => (
-                    <li key={item.href}>
-                      <Link
-                        href={item.href}
-                        className="group flex items-center justify-between gap-4 rounded-xl border border-border/80 px-4 py-3.5 transition-colors hover:border-brand-primary/25 hover:bg-brand-light/40 sm:px-5"
+        {/* Three Core Value Cards */}
+        <div className="container-custom pb-14 lg:pb-16">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {heroValueCards.map((card) => (
+              <div
+                key={card.number}
+                className="group relative overflow-hidden rounded-2xl border border-[#DCEAF2] bg-white p-6 shadow-[0_1px_2px_rgba(36,56,75,0.02)] transition-shadow hover:shadow-[0_25px_70px_-45px_rgba(21,54,83,0.55)]"
+              >
+                <div
+                  className="absolute -left-10 -top-10 h-24 w-24 rounded-full bg-[#E8F7FC]/70 blur-2xl"
+                  aria-hidden="true"
+                />
+                <div className="relative">
+                  <div className="flex items-center justify-between">
+                    <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-[#E8F7FC] text-sm font-semibold text-[#079BC5]">
+                      {card.number}
+                    </span>
+                    <span class className="text-[#21B5C8]" aria-hidden="true">
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 18 18"
+                        fill="none"
                       >
-                        <span className="flex items-center gap-3">
-                          <span className="text-xs tabular-nums text-text-secondary">
-                            {faNumber(index + 1)}
-                          </span>
-                          <span className="text-sm font-medium text-text-primary">{item.title}</span>
-                        </span>
-                        <span
-                          aria-hidden="true"
-                          className="text-brand-primary transition-transform group-hover:-translate-x-1"
-                        >
-                          ←
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
+                        <path
+                          d="M6 13L11 9L6 5"
+                          stroke="currentColor"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </span>
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold text-[#153653]">
+                    {card.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-7 text-[#24384B]">
+                    {card.description}
+                  </p>
+                </div>
               </div>
-              <div className="border-t border-border/70 px-6 py-4 text-xs leading-6 text-text-secondary sm:px-8">
-                راهکارها بر پایه شرایط واقعی سازمان طراحی و دامنه هر پروژه در پیشنهاد فنی مشخص می‌شود.
-              </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Trust Bar */}
-      <section aria-label="حوزه‌های تخصصی آتیوار" className="relative overflow-hidden border-b border-border bg-white py-5">
+      <section
+        aria-label="حوزه‌های تخصصی آتیوار"
+        className="relative overflow-hidden border-b border-border bg-white py-5"
+      >
         <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="group w-full overflow-hidden" dir="ltr">
@@ -200,9 +249,15 @@ export default function HomePage() {
                 className="flex items-center gap-12 whitespace-nowrap"
               >
                 {trustItems.map((item) => (
-                  <span key={`${copy}-${item}`} className="flex items-center gap-12">
+                  <span
+                    key={`${copy}-${item}`}
+                    className="flex items-center gap-12"
+                  >
                     <span className="text-sm text-text-primary">{item}</span>
-                    <span className="h-1 w-1 rounded-full bg-brand-accent" aria-hidden="true" />
+                    <span
+                      className="h-1 w-1 rounded-full bg-brand-accent"
+                      aria-hidden="true"
+                    />
                   </span>
                 ))}
               </div>
@@ -212,14 +267,40 @@ export default function HomePage() {
       </section>
 
       {/* Services */}
-      <section id="services" className="scroll-mt-20 border-b border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28">
-        <div className="container-custom">
+      <section
+        id="services"
+        className="relative scroll-mt-20 border-b border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28"
+      >
+        <Image
+          src="/img/Light Blue Floral Mandala Line Art.webp"
+          alt=""
+          aria-hidden="true"
+          width={900}
+          height={900}
+          className="pointer-events-none absolute -right-6 top-2 hidden h-[320px] w-auto rotate-180 opacity-25 lg:block xl:-right-10 xl:top-0 xl:h-[380px]"
+          priority
+        />
+        <Image
+          src="/img/Light Blue Floral Mandala Line Art.webp"
+          alt=""
+          aria-hidden="true"
+          width={900}
+          height={900}
+          className="pointer-events-none absolute -left-8 bottom-0 hidden h-[260px] w-auto rotate-0 opacity-30 lg:block xl:-left-12 xl:bottom-[-10px] xl:h-[320px]"
+          priority
+        />
+        <div className="container-custom relative">
           <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
             <div>
-              <p className="text-xs font-medium text-text-secondary">۰۱ / خدمات اصلی</p>
-              <h2 className="section-title mt-4">راهکارهایی برای مسائل واقعی سازمان‌ها</h2>
+              <p className="text-xs font-medium text-text-secondary">
+                ۰۱ / خدمات اصلی
+              </p>
+              <h2 className="section-title mt-4">
+                راهکارهایی برای مسائل واقعی سازمان‌ها
+              </h2>
               <p className="section-subtitle">
-                هر خدمت با دامنه روشن، خروجی قابل تعریف و معیار پذیرش مشخص ارائه می‌شود.
+                هر خدمت با دامنه روشن، خروجی قابل تعریف و معیار پذیرش مشخص ارائه
+                می‌شود.
               </p>
             </div>
             <Link
@@ -244,10 +325,14 @@ export default function HomePage() {
                   <h3 className="text-base font-semibold text-text-primary group-hover:text-brand-primary">
                     {service.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-7 text-text-secondary">{service.description}</p>
+                  <p className="mt-1 text-sm leading-7 text-text-secondary">
+                    {service.description}
+                  </p>
                 </div>
                 <p className="text-xs leading-6 text-text-secondary">
-                  <span className="block text-text-secondary/80">خروجی قابل تعریف</span>
+                  <span className="block text-text-secondary/80">
+                    خروجی قابل تعریف
+                  </span>
                   {service.output}
                 </p>
                 <span
@@ -267,31 +352,39 @@ export default function HomePage() {
         <div className="container-custom">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
             <div>
-              <p className="text-xs font-medium text-text-secondary">۰۲ / ارزش پیشنهادی</p>
+              <p className="text-xs font-medium text-text-secondary">
+                ۰۲ / ارزش پیشنهادی
+              </p>
               <h2 className="section-title mt-4">
                 فناوری زمانی ارزشمند است که نتیجه آن در عملکرد سازمان دیده شود
               </h2>
               <p className="section-subtitle">
-                آتیوار به سازمان کمک می‌کند پیش از انتخاب فناوری، مسئله و هدف را روشن کند؛ سپس
-                راهکاری متناسب با شرایط واقعی طراحی کند و امکان سنجش نتیجه را از ابتدا در پروژه
-                بگنجاند.
+                آتیوار به سازمان کمک می‌کند پیش از انتخاب فناوری، مسئله و هدف را
+                روشن کند؛ سپس راهکاری متناسب با شرایط واقعی طراحی کند و امکان
+                سنجش نتیجه را از ابتدا در پروژه بگنجاند.
               </p>
             </div>
 
             <div>
               <ul className="grid gap-x-10 border-t border-border sm:grid-cols-2">
                 {valuePoints.map((item, index) => (
-                  <li key={item} className="flex items-start gap-3 border-b border-border py-4">
+                  <li
+                    key={item}
+                    className="flex items-start gap-3 border-b border-border py-4"
+                  >
                     <span className="mt-0.5 text-xs tabular-nums text-brand-primary">
                       {faNumber(index + 1)}
                     </span>
-                    <span className="text-sm leading-7 text-text-primary">{item}</span>
+                    <span className="text-sm leading-7 text-text-primary">
+                      {item}
+                    </span>
                   </li>
                 ))}
               </ul>
               <p className="mt-6 text-sm leading-7 text-text-secondary">
-                میزان تحقق هر یک از این نتایج به شرایط سازمان، دامنه پروژه و کیفیت اجرا وابسته است؛
-                به همین دلیل، آتیوار بر ارزیابی اولیه و تعریف شاخص‌های قابل سنجش تأکید می‌کند.
+                میزان تحقق هر یک از این نتایج به شرایط سازمان، دامنه پروژه و
+                کیفیت اجرا وابسته است؛ به همین دلیل، آتیوار بر ارزیابی اولیه و
+                تعریف شاخص‌های قابل سنجش تأکید می‌کند.
               </p>
             </div>
           </div>
@@ -301,22 +394,34 @@ export default function HomePage() {
       {/* Intelligence levels */}
       <section className="border-y border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28">
         <div className="container-custom">
-          <p className="text-xs font-medium text-text-secondary">۰۳ / هوش مصنوعی سازمانی آتیوار</p>
+          <p className="text-xs font-medium text-text-secondary">
+            ۰۳ / هوش مصنوعی سازمانی آتیوار
+          </p>
           <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-            <h2 className="section-title">سازمان خود را در سه سطح به هوش مصنوعی مجهز کنید</h2>
+            <h2 className="section-title">
+              سازمان خود را در سه سطح به هوش مصنوعی مجهز کنید
+            </h2>
             <p className="max-w-md text-sm leading-7 text-text-secondary">
-              از داده تا دانش، از دانش تا هوش مصنوعی اختصاصی؛ سازمان می‌تواند از هر یک از سه سطح
-              آغاز کند.
+              از داده تا دانش، از دانش تا هوش مصنوعی اختصاصی؛ سازمان می‌تواند از
+              هر یک از سه سطح آغاز کند.
             </p>
           </div>
 
           <div className="mt-10 grid gap-x-10 gap-y-8 sm:grid-cols-3">
             {intelligenceLevels.map((level, index) => (
               <div key={level.title} className="border-t border-border pt-5">
-                <p className="text-xs tabular-nums text-text-secondary">{faNumber(index + 1)}</p>
-                <h3 className="mt-2 text-base font-semibold text-text-primary">{level.title}</h3>
-                <p className="mt-1 text-xs font-medium text-brand-accent">{level.tagline}</p>
-                <p className="mt-2 text-sm leading-7 text-text-secondary">{level.description}</p>
+                <p className="text-xs tabular-nums text-text-secondary">
+                  {faNumber(index + 1)}
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-text-primary">
+                  {level.title}
+                </h3>
+                <p className="mt-1 text-xs font-medium text-brand-accent">
+                  {level.tagline}
+                </p>
+                <p className="mt-2 text-sm leading-7 text-text-secondary">
+                  {level.description}
+                </p>
               </div>
             ))}
           </div>
@@ -336,17 +441,22 @@ export default function HomePage() {
       <section className="py-16 sm:py-24 lg:py-28">
         <div className="container-custom grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
           <div>
-            <p className="text-xs font-medium text-text-secondary">۰۴ / محیط کاربردی</p>
-            <h2 className="section-title mt-4">محیط اختصاصی هوش مصنوعی برای کار و دانش سازمانی</h2>
+            <p className="text-xs font-medium text-text-secondary">
+              ۰۴ / محیط کاربردی
+            </p>
+            <h2 className="section-title mt-4">
+              محیط اختصاصی هوش مصنوعی برای کار و دانش سازمانی
+            </h2>
             <p className="section-subtitle">
-              ATIVAR AI Workspace با هدف فراهم‌کردن محیطی سازمانی برای استفاده کنترل‌شده از
-              قابلیت‌های هوش مصنوعی طراحی می‌شود؛ محیطی که بتواند متناسب با نیازهای کاری،
-              سیاست‌های دسترسی و الزامات زیرساختی سازمان توسعه پیدا کند.
+              ATIVAR AI Workspace با هدف فراهم‌کردن محیطی سازمانی برای استفاده
+              کنترل‌شده از قابلیت‌های هوش مصنوعی طراحی می‌شود؛ محیطی که بتواند
+              متناسب با نیازهای کاری، سیاست‌های دسترسی و الزامات زیرساختی سازمان
+              توسعه پیدا کند.
             </p>
             <p className="mt-4 text-sm leading-7 text-text-secondary">
-              این محیط می‌تواند نقطه ورود کارکنان به دستیارهای هوشمند، ابزارهای کار با اسناد و
-              قابلیت‌های منتخب هوش مصنوعی باشد؛ بدون آنکه سازمان ناچار باشد برای هر نیاز، ابزار
-              جداگانه‌ای انتخاب و مدیریت کند.
+              این محیط می‌تواند نقطه ورود کارکنان به دستیارهای هوشمند، ابزارهای
+              کار با اسناد و قابلیت‌های منتخب هوش مصنوعی باشد؛ بدون آنکه سازمان
+              ناچار باشد برای هر نیاز، ابزار جداگانه‌ای انتخاب و مدیریت کند.
             </p>
             <Link
               href="/products/ai-workspace"
@@ -381,20 +491,29 @@ export default function HomePage() {
       {/* Process */}
       <section className="border-y border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28">
         <div className="container-custom">
-          <p className="text-xs font-medium text-text-secondary">۰۵ / روش همکاری</p>
+          <p className="text-xs font-medium text-text-secondary">
+            ۰۵ / روش همکاری
+          </p>
           <div className="mt-4 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
             <h2 className="section-title">از مسئله تا راهکار قابل اجرا</h2>
             <p className="max-w-md text-sm leading-7 text-text-secondary">
-              هر مرحله خروجی مشخص دارد و مرحله بعد بر پایه نتیجه مرحله قبل تعریف می‌شود.
+              هر مرحله خروجی مشخص دارد و مرحله بعد بر پایه نتیجه مرحله قبل تعریف
+              می‌شود.
             </p>
           </div>
 
           <ol className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-5 lg:gap-6">
             {process.map((step, index) => (
               <li key={step.title} className="border-t border-border pt-5">
-                <p className="text-xs tabular-nums text-text-secondary">{faNumber(index + 1)}</p>
-                <h3 className="mt-2 text-base font-semibold text-text-primary">{step.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-text-secondary">{step.desc}</p>
+                <p className="text-xs tabular-nums text-text-secondary">
+                  {faNumber(index + 1)}
+                </p>
+                <h3 className="mt-2 text-base font-semibold text-text-primary">
+                  {step.title}
+                </h3>
+                <p className="mt-2 text-sm leading-7 text-text-secondary">
+                  {step.desc}
+                </p>
               </li>
             ))}
           </ol>
@@ -406,15 +525,17 @@ export default function HomePage() {
         <div className="container-custom max-w-4xl text-center">
           <div className="relative overflow-hidden rounded-3xl border border-border bg-white px-6 py-12 sm:px-10 sm:py-14">
             <div className="absolute inset-0 -z-10 bg-[radial-gradient(700px_300px_at_50%_-20%,rgba(18,175,193,0.09),transparent)]" />
-            <h2 className="section-title">برای سازمان شما چه راهکاری مناسب است؟</h2>
+            <h2 className="section-title">
+              برای سازمان شما چه راهکاری مناسب است؟
+            </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-text-secondary">
-              اگر سازمان شما با گزارش‌گیری زمان‌بر، دانش پراکنده، فرایندهای ناکارآمد، پیچیدگی
-              سامانه‌های مالی یا نیاز به توسعه خدمات دیجیتال مواجه است، نقطه شروع، شناخت دقیق مسئله
-              است.
+              اگر سازمان شما با گزارش‌گیری زمان‌بر، دانش پراکنده، فرایندهای
+              ناکارآمد، پیچیدگی سامانه‌های مالی یا نیاز به توسعه خدمات دیجیتال
+              مواجه است، نقطه شروع، شناخت دقیق مسئله است.
             </p>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-8 text-text-secondary">
-              در جلسه اولیه، مسئله و هدف موردنظر را بررسی می‌کنیم تا مشخص شود چه نوع مشاوره یا
-              راهکاری می‌تواند برای سازمان شما مناسب باشد.
+              در جلسه اولیه، مسئله و هدف موردنظر را بررسی می‌کنیم تا مشخص شود چه
+              نوع مشاوره یا راهکاری می‌تواند برای سازمان شما مناسب باشد.
             </p>
             <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
               <Link href="/contact" className="btn btn-primary">
