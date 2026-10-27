@@ -1,8 +1,13 @@
 import Link from "next/link";
 import Image from "next/image";
+import { HeroMedia } from "@/components/sections/hero-media";
 import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
 import { faNumber } from "@/lib/number";
+
+// Hero background video (autoplay, muted, looping). Set both to null to use the still image only.
+const HERO_VIDEO_MP4: string | null = "/heropage-vids.mp4.mp4";
+const HERO_VIDEO_WEBM: string | null = null;
 
 export const metadata = createMetadata({
   title: "آتیوار | مشاوره فین‌تک، هوش مصنوعی سازمانی و تحول دیجیتال",
@@ -133,28 +138,27 @@ export default function HomePage() {
     <>
       {/* Hero */}
       <section className="relative isolate flex min-h-[calc(100vh-4rem)] items-center overflow-hidden supports-[height:100svh]:min-h-[calc(100svh-4rem)]">
-        {/* Full-bleed background image (portrait crop on phones/tablets, landscape on desktop) */}
+        {/* Full-bleed background video (with an instant image poster + fallback) */}
         <div className="absolute inset-0 -z-10">
-          <picture>
-            <source
-              media="(min-width: 1024px)"
-              srcSet="/heropage-vids.mp4"
-            />
-            <img
-              src="/img/hero-enterprise-mobile.webp"
-              alt="محیط واقعی سازمانی با تیم حرفه‌ای در حال گفتگو و همکاری"
-              className="absolute inset-0 h-full w-full object-cover object-center"
-              fetchPriority="high"
-              decoding="async"
-            />
-          </picture>
-          {/* Subtle scrim keeps the photo visible while text stays readable */}
+          <HeroMedia
+            videoSrc={HERO_VIDEO_MP4}
+            webmSrc={HERO_VIDEO_WEBM}
+            poster="/img/hero-enterprise.webp"
+            desktopImage="/img/hero-enterprise-2560.webp"
+            mobileImage="/img/hero-enterprise-mobile.webp"
+            alt="محیط واقعی سازمانی با تیم حرفه‌ای در حال گفتگو و همکاری"
+          />
+          {/* Dark layered scrims: richer media, still readable behind the light content card */}
           <div
-            className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.4)_0%,rgba(255,255,255,0.16)_45%,rgba(255,255,255,0)_72%)] md:bg-[linear-gradient(to_right,rgba(255,255,255,0.34)_0%,rgba(255,255,255,0.1)_48%,rgba(255,255,255,0)_74%)]"
+            className="absolute inset-0 bg-[#071f2e]/30"
             aria-hidden="true"
           />
           <div
-            className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white/85 via-white/35 to-transparent"
+            className="absolute inset-0 bg-[linear-gradient(to_right,rgba(7,31,46,0.5)_0%,rgba(7,31,46,0.2)_45%,rgba(7,31,46,0)_72%)]"
+            aria-hidden="true"
+          />
+          <div
+            className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-white/85 via-white/25 to-transparent"
             aria-hidden="true"
           />
         </div>
@@ -162,7 +166,7 @@ export default function HomePage() {
         <div className="relative mx-auto w-full max-w-[1500px] px-5 py-16 sm:px-8 sm:py-20 lg:px-12 lg:py-24">
           <div className="relative ms-auto w-full max-w-xl lg:max-w-2xl">
             <div
-              className="absolute -inset-x-4 -inset-y-6 -z-10 rounded-[2rem] border border-white/70 bg-white/60 shadow-[0_30px_90px_-50px_rgba(21,54,83,0.55)] backdrop-blur-md sm:-inset-x-5 sm:-inset-y-8 md:bg-white/70 lg:-inset-x-6 lg:-inset-y-10"
+              className="absolute -inset-x-4 -inset-y-6 -z-10 rounded-[2rem] border border-white/70 bg-white/[0.75] shadow-[0_30px_90px_-50px_rgba(21,54,83,0.55)] backdrop-blur-md sm:-inset-x-5 sm:-inset-y-8 md:bg-white/[0.85] lg:-inset-x-6 lg:-inset-y-10"
               aria-hidden="true"
             />
             <div className="inline-flex items-center gap-2 rounded-full border border-[#DCEAF2] bg-white/90 px-4 py-1.5 text-xs text-[#24384B] shadow-[0_1px_2px_rgba(36,56,75,0.02)] backdrop-blur">
