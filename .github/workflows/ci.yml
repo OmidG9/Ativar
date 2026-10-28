@@ -60,7 +60,7 @@ jobs:
     name: Build and smoke-test image
     needs: quality
     runs-on: [self-hosted, Ativar]
-    timeout-minutes: 20
+    timeout-minutes: 25
 
     steps:
       - name: Checkout
@@ -68,9 +68,17 @@ jobs:
 
       - name: Build image
         shell: bash
+        env:
+          NEXT_PUBLIC_ANALYTICS_SRC: ${{ vars.NEXT_PUBLIC_ANALYTICS_SRC }}
+          NEXT_PUBLIC_ANALYTICS_DOMAIN: ${{ vars.NEXT_PUBLIC_ANALYTICS_DOMAIN }}
+          NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${{ vars.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }}
         run: |
           set -euo pipefail
-          docker build --pull --tag "${IMAGE_NAME}:ci-${GITHUB_RUN_ID}" .
+          docker build --pull \
+            --build-arg NEXT_PUBLIC_ANALYTICS_SRC="${NEXT_PUBLIC_ANALYTICS_SRC:-}" \
+            --build-arg NEXT_PUBLIC_ANALYTICS_DOMAIN="${NEXT_PUBLIC_ANALYTICS_DOMAIN:-}" \
+            --build-arg NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION="${NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION:-}" \
+            --tag "${IMAGE_NAME}:ci-${GITHUB_RUN_ID}" .
 
       - name: Smoke-test container
         shell: bash
@@ -84,9 +92,10 @@ jobs:
           }
           trap cleanup EXIT
 
-          docker run -d --name "$name" "$image" >/dev/null
+          # Use a temporary local port to avoid any conflict with existing containers
+          docker run -d --name "$name" -p 127.0.0.1:14646:3000 "$image" >/dev/null
           status=starting
-          for _ in $(seq 1 30); do
+          for _ in $(seq 1 40); do
             status=$(docker inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$name")
             if [ "$status" = "healthy" ] || [ "$status" = "unhealthy" ] || [ "$status" = "exited" ] || [ "$status" = "dead" ]; then
               break
@@ -96,7 +105,7 @@ jobs:
 
           if [ "$status" != "healthy" ]; then
             echo "Container status: $status"
-            docker logs --tail 80 "$name" || true
+            docker logs --tail 100 "$name" || true
             exit 1
           fi
 
@@ -127,7 +136,7 @@ jobs:
         run: |
           set -euo pipefail
           if [ ! -f "$APP_ENV_FILE" ]; then
-            echo "::error::Env file '$APP_ENV_FILE' not found on the runner host. Create it from .env.example (see deploy/README.md)."
+            echo "::error::Env file '$APP_ENV_FILE' not found on the runner host. Create it at /etc/ativar/ativar.env"
             exit 1
           fi
           ENV_FILE="$APP_ENV_FILE" bash deploy/deploy.sh

@@ -1,5 +1,9 @@
 name: ativar
 
+networks:
+  ativar_net:
+    driver: bridge
+
 services:
   web:
     image: ativar-website:${TAG:-latest}
@@ -11,14 +15,14 @@ services:
         NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION: ${NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION:-}
     container_name: ativar-web
     restart: unless-stopped
+    networks:
+      - ativar_net
     env_file:
-      # Runtime secrets (Telegram / Resend / webhook).
-      # On the server keep this outside the repo, e.g. /etc/ativar/ativar.env,
-      # so `actions/checkout` cannot clean it up.
-      - path: ${APP_ENV_FILE:-.env.production}
+      # Runtime secrets on the server outside the repo: /etc/ativar/ativar.env
+      - path: ${APP_ENV_FILE:-/etc/ativar/ativar.env}
         required: false
     ports:
-      - "4646:3000"
+      - "127.0.0.1:4646:3000"
     stop_grace_period: 20s
     logging:
       driver: json-file
