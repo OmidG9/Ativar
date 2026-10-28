@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { TeamSlider } from "@/components/sections/team-slider";
+import { Credentials } from "@/components/sections/credentials";
 import { teamMembers } from "@/content/team";
 import { CTA_LABELS } from "@/lib/cta";
 import { createMetadata } from "@/lib/metadata";
@@ -32,6 +33,8 @@ export default function TeamPage() {
           </div>
         </div>
       </section>
+
+      <Credentials />
 
       <TeamSlider members={teamMembers} />
 
