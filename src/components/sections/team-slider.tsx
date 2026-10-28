@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { TeamMember } from "@/content/team";
 import { cn } from "@/lib/utils";
 
@@ -25,9 +25,9 @@ function Chevron({ direction }: { direction: "prev" | "next" }) {
       className="h-5 w-5"
     >
       {direction === "next" ? (
-        <path d="M15 18l-6-6 6-6" />
-      ) : (
         <path d="M9 18l6-6-6-6" />
+      ) : (
+        <path d="M15 18l-6-6 6-6" />
       )}
     </svg>
   );
@@ -37,12 +37,7 @@ function PlayPauseIcon({ playing }: { playing: boolean }) {
   return (
     <svg aria-hidden="true" viewBox="0 0 24 24" className="h-4 w-4">
       {playing ? (
-        <g
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-        >
+        <g fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
           <path d="M9 5v14" />
           <path d="M15 5v14" />
         </g>
@@ -134,9 +129,7 @@ function MemberSocials({ member }: { member: TeamMember }) {
           href={link.href}
           className="text-xs font-semibold text-brand-primary underline-offset-4 hover:underline"
           target={link.href.startsWith("mailto:") ? undefined : "_blank"}
-          rel={
-            link.href.startsWith("mailto:") ? undefined : "noreferrer noopener"
-          }
+          rel={link.href.startsWith("mailto:") ? undefined : "noreferrer noopener"}
         >
           {link.label}
         </a>
@@ -153,78 +146,79 @@ export function TeamSlider({ members }: TeamSliderProps) {
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
   const [tabHidden, setTabHidden] = useState(false);
-  const [resumeKey, setResumeKey] = useState(0);
   const playButtonRef = useRef<HTMLButtonElement>(null);
 
-  // Disable the automatic rotation for visitors who prefer reduced motion.
+  const total = members.length;
+
   useEffect(() => {
+    if (typeof window === "undefined") return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setIsPlaying(false);
     }
   }, []);
 
   useEffect(() => {
+    if (typeof document === "undefined") return;
     const onVisibilityChange = () => setTabHidden(document.hidden);
     onVisibilityChange();
     document.addEventListener("visibilitychange", onVisibilityChange);
-    return () =>
-      document.removeEventListener("visibilitychange", onVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", onVisibilityChange);
   }, []);
 
-  // Infinite rotation: after the last member it wraps back to the first.
+  const goTo = useCallback(
+    (index: number) => {
+      if (total === 0) return;
+      setActive((index % total + total) % total);
+    },
+    [total],
+  );
+
+  const goNext = useCallback(() => {
+    setActive((current) => (current + 1) % total);
+  }, [total]);
+
+  const goPrev = useCallback(() => {
+    setActive((current) => (current - 1 + total) % total);
+  }, [total]);
+
   useEffect(() => {
-    if (!isPlaying || hovered || focused || tabHidden || members.length <= 1)
-      return;
+    if (!isPlaying || hovered || focused || tabHidden || total <= 1) return;
 
     const timer = window.setTimeout(() => {
-      setActive((current) => (current + 1) % members.length);
+      goNext();
     }, PLAY_INTERVAL_MS);
 
     return () => window.clearTimeout(timer);
-  }, [
-    active,
-    isPlaying,
-    hovered,
-    focused,
-    tabHidden,
-    resumeKey,
-    members.length,
-  ]);
+  }, [active, isPlaying, hovered, focused, tabHidden, total, goNext]);
 
-  if (members.length === 0) return null;
+  const togglePlaying = useCallback(() => {
+    setIsPlaying((prev) => {
+      if (prev) return false;
+      setHovered(false);
+      setFocused(false);
+      return true;
+    });
+  }, []);
 
-  const safeActive = Math.min(active, members.length - 1);
+  const handleKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLDivElement>) => {
+      if (total <= 1) return;
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        goNext();
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        goPrev();
+      }
+    },
+    [total, goNext, goPrev],
+  );
+
+  if (total === 0) return null;
+
+  const safeActive = ((active % total) + total) % total;
   const member = members[safeActive];
-
-  const goTo = (index: number) => {
-    setActive((index + members.length) % members.length);
-    setResumeKey((key) => key + 1);
-  };
-
-  const togglePlaying = () => {
-    if (isPlaying) {
-      setIsPlaying(false);
-      return;
-    }
-
-    // The visitor explicitly asked for rotation, so ignore the hover/focus that
-    // is hovering over the card (e.g. the cursor resting on this button).
-    setHovered(false);
-    setFocused(false);
-    setIsPlaying(true);
-    setResumeKey((key) => key + 1);
-  };
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "ArrowLeft") {
-      event.preventDefault();
-      goTo(safeActive + 1);
-    }
-    if (event.key === "ArrowRight") {
-      event.preventDefault();
-      goTo(safeActive - 1);
-    }
-  };
 
   return (
     <section
@@ -235,16 +229,14 @@ export function TeamSlider({ members }: TeamSliderProps) {
         aria-hidden="true"
         className="pointer-events-none absolute -right-40 -top-40 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
         style={{
-          background:
-            "radial-gradient(circle, rgba(18, 175, 193, 0.16), transparent 70%)",
+          background: "radial-gradient(circle, rgba(18, 175, 193, 0.16), transparent 70%)",
         }}
       />
       <div
         aria-hidden="true"
         className="pointer-events-none absolute -bottom-40 -left-40 h-[28rem] w-[28rem] rounded-full opacity-60 blur-3xl"
         style={{
-          background:
-            "radial-gradient(circle, rgba(23, 107, 155, 0.12), transparent 70%)",
+          background: "radial-gradient(circle, rgba(23, 107, 155, 0.12), transparent 70%)",
         }}
       />
 
@@ -260,8 +252,7 @@ export function TeamSlider({ members }: TeamSliderProps) {
             </span>
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-7 text-text-secondary sm:text-base">
-            ترکیب تجربه، تخصص و فناوری در کنار یکدیگر برای ساخت راهکارهای پایدار
-            سازمانی.
+            ترکیب تجربه، تخصص و فناوری در کنار یکدیگر برای ساخت راهکارهای پایدار سازمانی.
           </p>
         </div>
 
@@ -274,9 +265,7 @@ export function TeamSlider({ members }: TeamSliderProps) {
             setFocused(true);
           }}
           onBlurCapture={(event) => {
-            if (
-              !event.currentTarget.contains(event.relatedTarget as Node | null)
-            ) {
+            if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
               setFocused(false);
             }
           }}
@@ -332,7 +321,7 @@ export function TeamSlider({ members }: TeamSliderProps) {
                   type="button"
                   aria-label="عضو قبلی"
                   className={controlClass}
-                  onClick={() => goTo(safeActive - 1)}
+                  onClick={goPrev}
                 >
                   <Chevron direction="prev" />
                 </button>
@@ -340,7 +329,7 @@ export function TeamSlider({ members }: TeamSliderProps) {
                   type="button"
                   aria-label="عضو بعدی"
                   className={controlClass}
-                  onClick={() => goTo(safeActive + 1)}
+                  onClick={goNext}
                 >
                   <Chevron direction="next" />
                 </button>
@@ -378,9 +367,7 @@ export function TeamSlider({ members }: TeamSliderProps) {
                 <button
                   ref={playButtonRef}
                   type="button"
-                  aria-label={
-                    isPlaying ? "توقف چرخش خودکار" : "شروع چرخش خودکار"
-                  }
+                  aria-label={isPlaying ? "توقف چرخش خودکار" : "شروع چرخش خودکار"}
                   aria-pressed={isPlaying}
                   onClick={togglePlaying}
                   className={cn(controlClass, "h-9 w-9")}

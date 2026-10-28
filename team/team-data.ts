@@ -71,6 +71,26 @@ export const teamMembers: TeamMember[] = [
     socials: {},
   },
   {
+    id: "saeed-rasouli",
+    name: "سعید رسولی",
+    roles: [
+      "معاون فنی",
+      "مسئول هدایت راهبردهای فنی",
+      "طراحی معماری، تحلیل، توسعه و مدیریت پروژه‌های فناوری اطلاعات",
+    ],
+    bio: "با تمرکز بر معماری نرم‌افزار، تحلیل سامانه‌ها و مدیریت پروژه‌های فناوری اطلاعات، زیرساخت‌های فنی پایدار و مقیاس‌پذیر را برای توسعه محصولات دیجیتال هدایت می‌کنم.",
+    skills: [
+      "Software Architecture",
+      "System Analysis",
+      "Backend",
+      "Cloud",
+      "DevOps",
+      "Project Management",
+    ],
+    image: "/team/saeed-rasouli.webp",
+    socials: {},
+  },
+  {
     id: "hamid-alizadeh",
     name: "حمید علیزاده",
     roles: ["مشاور حقوقی", "قراردادهای فناوری و کسب‌وکارهای دیجیتال"],
