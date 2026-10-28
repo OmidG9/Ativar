@@ -1,3 +1,8 @@
+"use client";
+
+import Image from "next/image";
+import { useEffect, useRef } from "react";
+
 type HeroMediaProps = {
   /** MP4 (H.264) source for the background video. */
   videoSrc?: string | null;
@@ -28,11 +33,23 @@ export function HeroMedia({
   mobileImage,
   alt,
 }: HeroMediaProps) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const preventContext = (e: Event) => e.preventDefault();
+    video.addEventListener("contextmenu", preventContext);
+    return () => video.removeEventListener("contextmenu", preventContext);
+  }, []);
+
   if (videoSrc || webmSrc) {
     return (
       <>
         <link rel="preload" as="image" href={poster} fetchPriority="high" />
         <video
+          ref={videoRef}
           className={mediaClassName}
           autoPlay
           muted
@@ -42,7 +59,10 @@ export function HeroMedia({
           poster={poster}
           aria-hidden="true"
           tabIndex={-1}
+          draggable={false}
+          onDragStart={(e) => e.preventDefault()}
           disablePictureInPicture
+          controlsList="nodownload noplaybackrate nofullscreen"
         >
           {webmSrc ? <source src={webmSrc} type="video/webm" /> : null}
           {videoSrc ? <source src={videoSrc} type="video/mp4" /> : null}

@@ -38,13 +38,13 @@ export function Footer() {
     <footer className="relative overflow-hidden border-t border-border">
       {/* Background image */}
       <Image
-        src="/img/PastelBlueFloralCornerBorder.webp"
+        src="/img/footer-mandala.svg"
         alt=""
         aria-hidden
         fill
         sizes="100vw"
         priority={false}
-        className="pointer-events-none select-none object-fill opacity-20"
+        className="pointer-events-none select-none object-cover opacity-30"
       />
       <div className="relative container-custom py-14">
         <div className="grid gap-10 lg:grid-cols-12">

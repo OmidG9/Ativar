@@ -182,9 +182,9 @@ export default function HomePage() {
             </h1>
 
             <p className="mt-6 max-w-2xl text-base leading-8 text-[#24384B] sm:text-lg sm:leading-9">
-              آتیوار به سازمان‌ها کمک می‌کند دانش، داده‌ها، فرایندها و سامانه‌های
-              خود را به راهکارهای هوشمند، یکپارچه و قابل‌کنترل تبدیل کنند؛ از
-              تدوین نقشه راه تا طراحی، پیاده‌سازی و بهبود مستمر.
+              آتیوار به سازمان‌ها کمک می‌کند دانش، داده‌ها، فرایندها و
+              سامانه‌های خود را به راهکارهای هوشمند، یکپارچه و قابل‌کنترل تبدیل
+              کنند؛ از تدوین نقشه راه تا طراحی، پیاده‌سازی و بهبود مستمر.
             </p>
 
             <div className="mt-9 flex flex-wrap items-center gap-3">
@@ -292,7 +292,7 @@ export default function HomePage() {
         className="relative overflow-hidden scroll-mt-20 border-b border-border bg-[#FAFCFD] py-16 sm:py-24 lg:py-28"
       >
         <Image
-          src="/img/Light Blue Floral Mandala Line Art.webp"
+          src="/img/Light Blue Floral Mandala Line Art.svg"
           alt=""
           aria-hidden="true"
           width={900}
@@ -301,7 +301,7 @@ export default function HomePage() {
           priority
         />
         <Image
-          src="/img/Light Blue Floral Mandala Line Art.webp"
+          src="/img/Light Blue Floral Mandala Line Art.svg"
           alt=""
           aria-hidden="true"
           width={900}
