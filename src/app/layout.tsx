@@ -122,7 +122,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fa" dir="rtl" className={vazirmatn.variable}>
+    <html lang="fa" dir="rtl" className={vazirmatn.variable} suppressHydrationWarning>
       <body className="font-sans">
         <a href="#main-content" className="skip-link">
           پرش به محتوای اصلی
